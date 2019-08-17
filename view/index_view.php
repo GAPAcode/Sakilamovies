@@ -189,6 +189,9 @@
 			</div>
 			<!-- Modal footer -->
 			<div class="modal-footer">
+				<a class="text-light btn btn-success ml-1 px-3" href="signup.php">
+					<i class="fa fa-sign-in"></i> Sign up
+				</a>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 			</div>
 		</div>

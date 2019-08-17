@@ -17,8 +17,6 @@
 			const icon = doc.querySelector('#redirect')
 			icon.style = 'display:block'
 		}
-
-		
 	}
 	
 	const getCity = (e) => {
@@ -36,6 +34,7 @@
 		}
 	}
 	
+	// settings
 	if(doc.location.pathname == "/sakila/settings.php"){
 		form = doc.querySelector('#settings')
 		city = doc.querySelector('#city')
@@ -44,6 +43,7 @@
 		form.addEventListener('click', getCity)
 	}
 
+	// Indice
 	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index.php') {
 		const loginModal = doc.querySelector('#login'),
 		search = doc.querySelector('#film_search'),
@@ -51,11 +51,11 @@
 		error = doc.querySelector('#error')
 
 		if(error){
+			const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
+
 			error.style = 'display:block;'
 			error.className = 'modal fade opaque'
 			setTimeout(() => error.className = 'modal fade show', 50)
-
-			const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
 
 			errorBtns.forEach( btn => {
 				btn.addEventListener('click',() => {
