@@ -98,8 +98,8 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<form class="form-inline p-1" action="<?php $thispage ?>" method="get">
-				<input id="s_search" class="form-control mr-1" type="text" name="s" placeholder="Search">
+			<form id="film_search" class="form-inline p-1" action="<?php $thispage ?>" method="get">
+				<input id="s_input" class="form-control mr-1" type="text" name="s" placeholder="Search">
 				<input type="submit" class="btn btn-warning font-weight-bold" value="Search">
 			</form>
 		</li>

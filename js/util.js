@@ -8,6 +8,18 @@
 		const icon = doc.querySelector('#redirect')
 		icon.style = 'display:block;'
 	}
+
+	const checkEmpty = (e,obj) => {
+		if(obj.value === '' || obj.value === null){
+			e.preventDefault()
+			alert('No has ingresado nada a la busqueda')
+		}else{
+			const icon = doc.querySelector('#redirect')
+			icon.style = 'display:block'
+		}
+
+		
+	}
 	
 	const getCity = (e) => {
 		if(e.target.name == "st_country"){
@@ -34,6 +46,8 @@
 
 	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index.php') {
 		const loginModal = doc.querySelector('#login'),
+		search = doc.querySelector('#film_search'),
+		searchInput = doc.querySelector('#s_input'),
 		error = doc.querySelector('#error')
 
 		if(error){
@@ -52,7 +66,9 @@
 			})
 		}
 		
-		login.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
+		search.addEventListener( 'submit', (e) => checkEmpty(e,searchInput))
+
+		loginModal.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
 	}
 	
 
