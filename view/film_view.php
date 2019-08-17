@@ -83,10 +83,20 @@
 					</div>
 				</div>
 			</div>
+			<!-- validates if is logged or not -->
+			<?php if(isset($_SESSION["user"])): ?>
 
 			<div class="card-footer bg-dark">
 				<button class="btn btn-success w-100">Rent this film for <span class="badge badge-primary"><?php echo $film->film_details->get_precio() ?>$</span></button>
 			</div>
+
+			<?php else: ?>
+
+			<button type="button" class="btn btn-primary w-100 py-3" data-toggle="modal" data-target="#login">
+				<i class="fa fa-user"></i> Login or signup to rent this film!
+			</button>
+
+			<?php endif ?>
 		</div>
 		<!-- aside/widgets -->
 		<div class="col-lg-3">
