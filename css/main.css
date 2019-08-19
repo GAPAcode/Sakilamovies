@@ -62,3 +62,11 @@
 	height: 190px;
 	margin-top: 6rem
 }
+.film-cart{
+	width:2.6rem;
+	height: 2.6rem;
+}
+.film-cart i{
+	width:90%;
+	text-align:center;
+}

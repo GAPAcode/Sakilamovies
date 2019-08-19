@@ -1,10 +1,22 @@
+<!-- Barra de navegacion  -->
 <nav class="navbar navbar-expand-lg bg-dark">
 	<div class="container">
-		<a href="index.php" class="navbar-brand text-light">SAKILA <small class="font-weight-light">movies</small></a>
+		<!-- brand logo -->
+		<a href="index.php" class="navbar-brand text-light">
+			SAKILA <small class="font-weight-light">movies</small>
+		</a>
 
-
+		<!-- navbar principal -->
 		<ul class="navbar-nav">
 		<?php if (isset($_SESSION["user"])): ?>
+		<!-- vista si ha iniciado sesion el usuario-->
+
+			<li class="nav-item">
+				<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="#" title="Film Cart">
+					<i class="fa fa-shopping-cart"></i>
+				</a>
+			</li>
+
 			<li class="nav-item">
 				<a class="nav-link btn btn-secondary px-3" href="index.php">
 					<i class="fa fa-home"></i> Index
@@ -25,8 +37,11 @@
 
 			<img src="/uploads/<?php echo $_SESSION['profile']?>" class="ml-2 img-fluid profile-pic">
 			<p class="text-light ml-2 my-auto pfl-username"> <?php echo $_SESSION["user"]; ?></p>
-	
+			
+			<!-- vista si ha iniciado sesion el usuario-->
+
 			<?php else: ?>
+			<!-- vista si no ha iniciado sesion el usuario -->
 				<li class="nav-item">
 					<a class="nav-link btn btn-secondary px-3" href="index.php">
 						<i class="fa fa-home"></i> Index
@@ -42,13 +57,14 @@
 						<i class="fa fa-sign-in"></i> Sign up
 					</a>
 				</li>
-				
+			<!-- vista si no ha iniciado sesion el usuario -->
 		<?php endif ?>
 		</ul>
 		
 	</div>
 </nav>
 
+<!-- Slider (actualmente estatico o default de bootstrap) -->
 <div class="container">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
@@ -90,7 +106,7 @@
 		</a>
 	</div>
 
-	<!-- Menu de páginas -->
+	<!-- SubMenu de páginas -->
 	<ul id="sup_nav" class="nav bg-info font-weight-light">
 		<li class="ml-auto nav-item">
 			<a class="nav-link text-light my-1" href="index.php">
@@ -104,10 +120,15 @@
 			</form>
 		</li>
 	</ul>
+	<!-- SubMenu de páginas -->
 
+	<!-- paginacion -->
 	<?php $index->get_paginacion() ?>
-	<!-- sidenav de categorias -->
+
+	
 	<div class="row mb-5">
+
+		<!-- sidenav de categorias -->
 		<div class="col-lg-3">
 			<ul id="accordion" class="nav justify-content-center bg-info font-weight-light flex-column">
 				<li class="nav-item">
@@ -122,7 +143,9 @@
 				</li>
 			</ul>
 		</div>
-		<!-- peliculas -->
+		<!-- sidenav de categorias -->
+
+		<!-- Peliculas -->
 		<div class="col-lg-9">
 			<?php $index->get_results_header(); ?>
 			<div class="row">
@@ -153,10 +176,13 @@
 			</div>
 			
 		</div>
+		<!-- Peliculas -->
 	</div>
 	<?php $index->get_paginacion() ?>
 </div>
+<!-- Slider (actualmente estatico o default de bootstrap) -->
 
+<!-- Modal del login -->
 <div class="modal fade" id="login">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -197,7 +223,9 @@
 		</div>
 	</div>
 </div>
+<!-- Modal del login -->
 
+<!-- Modal de error login -->
 <?php if(isset($error)): ?>
 <div class="modal fade" id="error">
 	<div class="modal-dialog">
@@ -218,7 +246,9 @@
 	</div>
 </div>
 <?php endif ?>
+<!-- Modal de error login -->
 
+<!-- Icono de redireccion -->
 <div id="redirect" class="w-100" style="display:none">
 	<div class="mx-auto w-25 h-100 bg-light rounded pt-5">
 		<div class="w-25 mx-auto">
@@ -227,7 +257,10 @@
 		<p style="display:table" class="mx-auto mt-2"><strong>Espere por favor...</strong></p>
 	</div>
 </div>
+<!-- Icono de redireccion -->
 
+<!-- pie de pagina -->
 <footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
         Lorem ipsum dolor, sit amet consectetur
 </footer>
+<!-- pie de pagina -->

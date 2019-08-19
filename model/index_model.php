@@ -183,7 +183,6 @@
 					:('<h3 class="text-light">' . $this->total_reg . ' results of ' . $this->busqueda_actual . '</h3>');
 			}
 		}
-
 		public function get_pag_actual(){
 			return $this->pag_actual;
 		}
