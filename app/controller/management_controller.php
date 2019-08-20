@@ -1,5 +1,5 @@
 <?php 
-require_once 'model/management_model.php';
+require_once 'app/model/management_model.php';
 
 session_start();
 $thispage = $_SERVER["PHP_SELF"];
@@ -45,10 +45,10 @@ if (isset($_POST["add_inv"])) {
 }
 
 if (isset($_SESSION['user_manager'])) {
-	require_once 'view/management_view.php';
+	require_once 'app/view/management_view.php';
 }
 else{
-	require_once 'view/management_login_view.php';
+	require_once 'app/view/management_login_view.php';
 }
 
  ?>

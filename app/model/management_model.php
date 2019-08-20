@@ -1,7 +1,7 @@
 <?php 
-require_once 'model/obj_connection.php';
-require_once 'model/obj_staff.php';
-require_once 'model/obj_categoria.php';
+require_once 'app/model/obj_connection.php';
+require_once 'app/model/obj_staff.php';
+require_once 'app/model/obj_categoria.php';
 /**
  * 
  */

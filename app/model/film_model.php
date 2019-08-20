@@ -1,11 +1,12 @@
 <?php 
-require_once 'model/obj_connection.php';
-require_once 'model/obj_film_list.php';
+require_once 'app/model/obj_connection.php';
+require_once 'app/model/obj_film_list.php';
+require_once 'app/model/index_model.php';
 
 /**
  * 
  */
-class Film extends Conexion
+class Film extends Index
 {
 	public $film_details;
 	

@@ -3,10 +3,14 @@
 	const OK = 200,
 	NOT_FOUND = 404
 
-	const fadeOutAtLogin = (obj) => {
-		obj.className = 'modal fade hide'
+	const showRedirect = () => {
 		const icon = doc.querySelector('#redirect')
 		icon.style = 'display:block;'
+	}
+	
+	const fadeOutAtLogin = (obj) => {
+		obj.className = 'modal fade hide'
+		showRedirect()
 	}
 
 	const checkEmpty = (e,obj) => {
@@ -33,6 +37,45 @@
 			ajax.send( encodeURI(`country=${e.target.value}&city=${inputCity.value}`) )
 		}
 	}
+	//general
+	doc.addEventListener('DOMContentLoaded',() => {
+		const navbarbtns = doc.querySelectorAll('.navbar .nav-item')
+		
+		navbarbtns.forEach((btn) => {
+			if(!btn.querySelector('[data-toggle="modal"]')){			
+				btn.addEventListener( 'click' , () => showRedirect() )
+			}
+		})
+
+	})
+	
+	// Indice
+	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index.php') {
+		const loginModal = doc.querySelector('#login'),
+		search = doc.querySelector('#film_search'),
+		searchInput = doc.querySelector('#s_input'),
+		error = doc.querySelector('#error')
+		
+
+		if(error){
+			const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
+
+			error.style = 'display:block;'
+			error.className = 'modal fade opaque'
+			setTimeout(() => error.className = 'modal fade show', 50)
+			
+			errorBtns.forEach( btn => {
+				btn.addEventListener('click',() => {
+					error.className = 'modal fade hide'
+					setTimeout(() => error.style = 'display:none', 150)
+				})
+			})
+		}
+		
+		search.addEventListener( 'submit', (e) => checkEmpty(e,searchInput))
+		
+		loginModal.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
+	}
 	
 	// settings
 	if(doc.location.pathname == "/sakila/settings.php"){
@@ -42,34 +85,5 @@
 		
 		form.addEventListener('click', getCity)
 	}
-
-	// Indice
-	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index.php') {
-		const loginModal = doc.querySelector('#login'),
-		search = doc.querySelector('#film_search'),
-		searchInput = doc.querySelector('#s_input'),
-		error = doc.querySelector('#error')
-
-		if(error){
-			const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
-
-			error.style = 'display:block;'
-			error.className = 'modal fade opaque'
-			setTimeout(() => error.className = 'modal fade show', 50)
-
-			errorBtns.forEach( btn => {
-				btn.addEventListener('click',() => {
-					error.className = 'modal fade hide'
-					//error.style = 'display:none'
-					setTimeout(() => error.style = 'display:none', 150)
-				})
-			})
-		}
-		
-		search.addEventListener( 'submit', (e) => checkEmpty(e,searchInput))
-
-		loginModal.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
-	}
-	
 
 })(console.log, document, new XMLHttpRequest)

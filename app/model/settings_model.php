@@ -1,5 +1,5 @@
 <?php 
-require_once 'obj_connection.php';
+require_once 'app/obj_connection.php';
 
 /**
  * 

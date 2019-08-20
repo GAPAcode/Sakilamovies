@@ -1,55 +1,9 @@
-<nav class="navbar navbar-expand-lg bg-dark">
-<div class="container">
-	<a href="index.php" class="navbar-brand text-light">
-		SAKILA <small class="font-weight-light">movies</small>
-	</a>
-
-
-	<ul class="navbar-nav">
-	<?php if (isset($_SESSION["user"])): ?>
-		<li class="nav-item">
-			<a class="nav-link btn btn-secondary px-3" href="index.php">
-				<i class="fa fa-home"></i> Index
-			</a>
-		</li>
-
-		<li class="nav-item">
-			<a class="nav-link btn btn-danger ml-1 px-3" href="index.php?logout=yes">
-				<i class="fa fa-sign-out"></i> Logout
-			</a>
-		</li>
-
-		<img src="/uploads/<?php echo $_SESSION['profile']?>" class="ml-2 img-fluid profile-pic">
-		<p class="text-light ml-2 my-auto pfl-username"> <?php echo $_SESSION["user"]; ?></p>
-
-		<li class="nav-item my-auto">
-				<a class="nav-link ml-2 btn btn-light my-auto pt-1 pb-0 px-1" href="#">
-					<i class="fa fa-gear settings-icon"></i>
-				</a>
-		</li>
-		
-		<?php else: ?>
-			<li class="nav-item">
-				<a class="nav-link btn btn-secondary px-3" href="index.php">
-					<i class="fa fa-home"></i> Index
-				</a>
-			</li>
-			<li class="nav-item">
-				<button type="button" class="nav-link text-light btn btn-primary ml-1 px-3" data-toggle="modal" data-target="#login">
-					<i class="fa fa-user"></i> Login
-				</button>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-light btn btn-success ml-1 px-3" href="signup.php">
-					<i class="fa fa-sign-in"></i> Sign up
-				</a>
-			</li>
-			
-	<?php endif ?>
-	</ul>
-	
-</div>
-</nav>
+<?php 
+	echo $film->get_navbar(
+		$film->get_session_username(),
+		$film->get_session_profile_pic()
+	);
+?>
 <div class="container">
 	<div class="rows">
 		<!-- detalles del film -->
@@ -105,6 +59,11 @@
 	</div>
 </div>
 
+
+<footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
+	Lorem ipsum dolor, sit amet consectetur
+</footer>
+
 <div class="modal fade" id="login">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -143,6 +102,13 @@
 	</div>
 </div>
 
-<footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
-        Lorem ipsum dolor, sit amet consectetur
-</footer>
+<!-- Icono de redireccion -->
+<div id="redirect" class="w-100" style="display:none">
+	<div class="mx-auto w-25 h-100 bg-light rounded pt-5">
+		<div class="w-25 mx-auto">
+			<i class="fa fa-refresh fa-spin fa-5x mx-auto"></i>
+		</div>
+		<p style="display:table" class="mx-auto mt-2"><strong>Espere por favor...</strong></p>
+	</div>
+</div>
+<!-- Icono de redireccion -->

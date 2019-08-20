@@ -1,12 +1,10 @@
 <?php 
-require_once 'model/film_model.php';
+require_once 'app/model/film_model.php';
 $thispage = $_SERVER['PHP_SELF'];
-session_start();
 
 if (isset($_GET["fid"])) {
 	$film = new Film($_GET["fid"]);
 }
 
-
-require_once 'view/film_view.php';
+require_once 'app/view/film_view.php';
  ?>

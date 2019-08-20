@@ -1,71 +1,14 @@
-<!-- Barra de navegacion  -->
-<nav class="navbar navbar-expand-lg bg-dark">
-	<div class="container">
-		<!-- brand logo -->
-		<a href="index.php" class="navbar-brand text-light">
-			SAKILA <small class="font-weight-light">movies</small>
-		</a>
+<!-- Barra de navegacion -->
+<?php 
+	echo $index->get_navbar(
+			$index->get_session_username(),
+			$index->get_session_profile_pic()
+);
+?>
+<!-- Barra de navegacion -->
 
-		<!-- navbar principal -->
-		<ul class="navbar-nav">
-		<?php if (isset($_SESSION["user"])): ?>
-		<!-- vista si ha iniciado sesion el usuario-->
-
-			<li class="nav-item">
-				<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="#" title="Film Cart">
-					<i class="fa fa-shopping-cart"></i>
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link btn btn-secondary px-3" href="index.php">
-					<i class="fa fa-home"></i> Index
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link btn btn-danger ml-1 px-3" href="index.php?logout=yes">
-					<i class="fa fa-sign-out"></i> Logout
-				</a>
-			</li>
-
-			<li class="nav-item my-auto">
-				<a class="nav-link ml-2 btn btn-light my-auto pt-1 pb-0 px-1" href="settings.php">
-					<i class="fa fa-gear settings-icon"></i>
-				</a>
-			</li>
-
-			<img src="/uploads/<?php echo $_SESSION['profile']?>" class="ml-2 img-fluid profile-pic">
-			<p class="text-light ml-2 my-auto pfl-username"> <?php echo $_SESSION["user"]; ?></p>
-			
-			<!-- vista si ha iniciado sesion el usuario-->
-
-			<?php else: ?>
-			<!-- vista si no ha iniciado sesion el usuario -->
-				<li class="nav-item">
-					<a class="nav-link btn btn-secondary px-3" href="index.php">
-						<i class="fa fa-home"></i> Index
-					</a>
-				</li>
-				<li class="nav-item">
-					<button type="button" class="nav-link text-light btn btn-primary ml-1 px-3" data-toggle="modal" data-target="#login">
-						<i class="fa fa-user"></i> Login
-					</button>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-light btn btn-success ml-1 px-3" href="signup.php">
-						<i class="fa fa-sign-in"></i> Sign up
-					</a>
-				</li>
-			<!-- vista si no ha iniciado sesion el usuario -->
-		<?php endif ?>
-		</ul>
-		
-	</div>
-</nav>
-
-<!-- Slider (actualmente estatico o default de bootstrap) -->
 <div class="container">
+	<!-- Slider (actualmente estatico o default de bootstrap) -->
 	<div id="demo" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ul class="carousel-indicators">
@@ -105,6 +48,7 @@
 			<span class="carousel-control-next-icon"></span>
 		</a>
 	</div>
+	<!-- Slider (actualmente estatico o default de bootstrap) -->
 
 	<!-- SubMenu de páginas -->
 	<ul id="sup_nav" class="nav bg-info font-weight-light">
@@ -124,8 +68,9 @@
 
 	<!-- paginacion -->
 	<?php $index->get_paginacion() ?>
-
+	<!-- paginacion -->
 	
+
 	<div class="row mb-5">
 
 		<!-- sidenav de categorias -->
@@ -178,9 +123,18 @@
 		</div>
 		<!-- Peliculas -->
 	</div>
+
+	<!-- paginacion -->
 	<?php $index->get_paginacion() ?>
+	<!-- paginacion -->
 </div>
-<!-- Slider (actualmente estatico o default de bootstrap) -->
+
+
+<!-- pie de pagina -->
+<footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
+	Lorem ipsum dolor, sit amet consectetur
+</footer>
+<!-- pie de pagina -->
 
 <!-- Modal del login -->
 <div class="modal fade" id="login">
@@ -258,9 +212,3 @@
 	</div>
 </div>
 <!-- Icono de redireccion -->
-
-<!-- pie de pagina -->
-<footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
-        Lorem ipsum dolor, sit amet consectetur
-</footer>
-<!-- pie de pagina -->

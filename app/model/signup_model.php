@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'model/obj_connection.php';
+require_once 'app/model/obj_connection.php';
 
 /**
  * 

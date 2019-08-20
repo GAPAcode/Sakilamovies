@@ -1,5 +1,5 @@
 <?php 
-	require_once 'model/signup_model.php';
+	require_once 'app/model/signup_model.php';
 	$thispage = $_SERVER['PHP_SELF'];
 	$signup = new signup();
 	session_start();
@@ -19,5 +19,5 @@
 		}
 	}
 
-	require_once 'view/signup_view.php';
+	require_once 'app/view/signup_view.php';
  ?>

@@ -1,5 +1,5 @@
 <?php 
-require_once 'model/settings_model.php';
+require_once 'app/model/settings_model.php';
 session_start();
 if (!isset($_SESSION["user"])) {
 	header("location:index.php");
@@ -31,6 +31,6 @@ if (isset($_POST["save"])) {
 
 $countries = $settings->get_countries();
 $cities = $settings->get_city();
-require_once 'view/settings_view.php';
+require_once 'app/view/settings_view.php';
 $settings->close_connection();
  ?>

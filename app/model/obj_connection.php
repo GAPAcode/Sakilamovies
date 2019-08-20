@@ -1,5 +1,5 @@
 <?php 
-	require 'model/config.php';
+	require 'app/model/config.php';
 
 	/**
 	 * Clase de conexion a la base de datos con PDO
