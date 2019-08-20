@@ -9,7 +9,7 @@
 		<!-- detalles del film -->
 		<div class="col-lg-9">
 			<div class="card-header bg-light">
-				<h3><?php echo $film->film_details->get_titulo() ?></h3>
+				<h3 id="film-title"><?php echo $film->film_details->get_titulo() ?></h3>
 				<strong>Category: </strong> <span class="badge badge-warning"><?php echo $film->film_details->get_categoria() ?></span>
 			</div>
 			<div class="card-body bg-light">
@@ -33,7 +33,7 @@
 				<div class="bg-info p-3 w-25 rounded">
 					<h5 class="text-light">Rent price</h5>
 					<div class="bg-dark p-1 w-50 rounded">
-						<span class="font-weight-bold text-light"><?php echo $film->film_details->get_precio() ?>$</span>
+						<span id="film-price" class="font-weight-bold text-light"><?php echo $film->film_details->get_precio() ?></span>
 					</div>
 				</div>
 			</div>
@@ -41,7 +41,9 @@
 			<?php if(isset($_SESSION["user"])): ?>
 
 			<div class="card-footer bg-dark">
-				<button class="btn btn-success w-100">Rent this film for <span class="badge badge-primary"><?php echo $film->film_details->get_precio() ?>$</span></button>
+				<button id="rent-btn" class="btn btn-success w-100" value="<?php echo $film->film_details->get_id() ?>">
+					Rent this film for <span class="badge badge-primary"><?php echo $film->film_details->get_precio() ?>$</span>
+				</button>
 			</div>
 
 			<?php else: ?>

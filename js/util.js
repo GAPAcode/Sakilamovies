@@ -1,5 +1,5 @@
 ;
-((c , doc , ajax) => {
+((c , doc , ajax, json) => {
 	const OK = 200,
 	NOT_FOUND = 404
 
@@ -23,9 +23,9 @@
 		}
 	}
 	
-	const getCity = (e) => {
+	const getCity = (e,city,inputCity) => {
 		if(e.target.name == "st_country"){
-			ajax.open('POST','./view/settings_paises_view.php',true)
+			ajax.open('POST','./app/functions.php',true)
 			ajax.addEventListener('readystatechange', () => {
 				if(ajax.status >= OK && ajax.status < 400){
 					city.innerHTML = ajax.response
@@ -36,6 +36,26 @@
 			ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
 			ajax.send( encodeURI(`country=${e.target.value}&city=${inputCity.value}`) )
 		}
+	}
+
+	const addToCart = (filmId,title,price) => {
+		const film = {
+			'filmId' : filmId,
+			'title' : title,
+			'price' : price
+		}
+
+		ajax.open('POST','./app/functions.php',true)
+		ajax.addEventListener('load', () => {
+			if(ajax.status >= OK && ajax.status < 400){
+				alert(`añadido al carrito correctamente ${ajax.responseText}`)
+			}else if (ajax.status === NOT_FOUND){
+				alert(`Error ${ajax.status}, ${ajax.statusText}`)
+			}
+		})
+		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+		ajax.send( encodeURI(`filmjson=${JSON.stringify(film)}`) )
+		
 	}
 	//general
 	doc.addEventListener('DOMContentLoaded',() => {
@@ -83,7 +103,20 @@
 		city = doc.querySelector('#city')
 		inputCity = doc.querySelector('#select_city')
 		
-		form.addEventListener('click', getCity)
+		form.addEventListener('click',(e) => getCity(e,city,inputCity))
+	}
+
+	// Film
+	if(doc.location.pathname == '/sakila/film.php'){
+		const addFilmBtn = doc.querySelector('#rent-btn'),
+		title = doc.querySelector('#film-title'),
+		price = doc.querySelector('#film-price')
+		
+		c()
+
+		addFilmBtn.addEventListener('click', (e) => addToCart(e.target.value,
+															title.textContent,
+															price.textContent ))
 	}
 
 })(console.log, document, new XMLHttpRequest)
