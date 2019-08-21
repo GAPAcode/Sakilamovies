@@ -59,10 +59,10 @@
 	}
 	//general
 	doc.addEventListener('DOMContentLoaded',() => {
-		const navbarbtns = doc.querySelectorAll('.navbar .nav-item')
+		const navbarbtns = doc.querySelectorAll('.nav-item, .nav-item, .dropdown-item, .page-item, .film-btn')
 		
 		navbarbtns.forEach((btn) => {
-			if(!btn.querySelector('[data-toggle="modal"]')){			
+			if(!btn.querySelector('[data-toggle] ')){			
 				btn.addEventListener( 'click' , () => showRedirect() )
 			}
 		})

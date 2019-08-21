@@ -70,3 +70,19 @@
 	width:90%;
 	text-align:center;
 }
+.cart-delete{
+	text-decoration: none;
+	border: #937f7f66 2px solid;
+	border-radius: 2px;
+    padding-bottom: 0.1rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    font-weight: 800;
+    background-color: #dc3545;
+	color: white !important;
+	transition-duration: 0.5s;
+}
+.cart-delete:hover{
+	background-color: #ff5f5f;
+	text-decoration: none;
+}

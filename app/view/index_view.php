@@ -57,7 +57,7 @@
 				Index
 			</a>
 		</li>
-		<li class="nav-item">
+		<li>
 			<form id="film_search" class="form-inline p-1" action="<?php $thispage ?>" method="get">
 				<input id="s_input" class="form-control mr-1" type="text" name="s" placeholder="Search">
 				<input type="submit" class="btn btn-warning font-weight-bold" value="Search">
@@ -113,7 +113,9 @@
 								</div>
 							</div>
 							<div class="card-footer p-0 bg-dark rounded-bottom">
-								<a href="film.php?fid=<?php echo($film->get_id()); ?>" class="btn btn-primary w-100"><?php echo ($film->get_precio()) ?>$</a>
+								<a href="film.php?fid=<?php echo($film->get_id()); ?>" class="film-btn btn btn-primary w-100">
+									<?php echo ($film->get_precio()) ?>$
+								</a>
 							</div>
 						</div>
 					</div>

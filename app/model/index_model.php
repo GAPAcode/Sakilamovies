@@ -44,7 +44,7 @@
 				//vista si hay usuario en sesión
 				$content = $content . '
 					<li class="nav-item">
-						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="#" title="Film Cart">
+						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="cart.php" title="Film Cart">
 							<i class="fa fa-shopping-cart"></i>
 						</a>
 					</li>
