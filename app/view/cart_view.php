@@ -23,11 +23,32 @@
                         <th></th>
                     </thead>
                     <tbody>
+                        <?php
+                            $totalPayment = 0; 
+                            foreach( $_SESSION['cart'] as $cartItem ):
+                            $objCartItem = json_decode($cartItem);
+                        ?>
                         <tr>
-                            <td>122</td>
-                            <td>Academy Dinosaur</td>
-                            <td>12.33$</td>
-                            <td><a class="cart-delete" href="#">&times;</a></td>
+                            <td> <?php echo $objCartItem->filmId ?> </td>
+                            <td> <?php echo $objCartItem->title ?> </td>
+                            <td> $<?php echo $objCartItem->price ?> </td>
+                            <td> <a href="#" class="cart-delete" 
+                                    data-item=" <?php echo $objCartItem->filmId ?> ">
+                                    &times;
+                                </a> 
+                            </td>
+                        </tr>
+                        <?php
+                            $totalPayment += floatval($objCartItem->price);
+                            endforeach; 
+                        ?>
+                        <tr>
+                            <td colspan="2" class="text-right">
+                                <strong>Total:</strong>
+                            </td>
+                            <td colspan="2">
+                                <strong> $<?php echo $totalPayment; ?> </strong>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -48,7 +48,14 @@
 		ajax.open('POST','./app/functions.php',true)
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
-				alert(`añadido al carrito correctamente ${ajax.responseText}`)
+
+				if( ajax.response != 'The film is on the cart'){
+					alert(`Film added correctly to the Cart ${ajax.responseText}`)
+				}
+				else {
+					alert(`This film is already in the cart`)
+				}
+
 			}else if (ajax.status === NOT_FOUND){
 				alert(`Error ${ajax.status}, ${ajax.statusText}`)
 			}
@@ -57,6 +64,20 @@
 		ajax.send( encodeURI(`filmjson=${JSON.stringify(film)}`) )
 		
 	}
+
+	const deleteCartItem = (filmId) => {
+		ajax.open('POST','./app/functions.php',true)
+		ajax.addEventListener('load', () => {
+			if(ajax.status >= OK && ajax.status < 400){
+				alert(`${ajax.response}`)
+			}else if (ajax.status === NOT_FOUND){
+				alert(`Error ${ajax.status}, ${ajax.statusText}`)
+			}
+		})
+		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+		ajax.send( encodeURI(`deleteItem=${filmId}`) )
+	}
+
 	//general
 	doc.addEventListener('DOMContentLoaded',() => {
 		const navbarbtns = doc.querySelectorAll('.nav-item, .nav-item, .dropdown-item, .page-item, .film-btn')
@@ -117,6 +138,14 @@
 		addFilmBtn.addEventListener('click', (e) => addToCart(e.target.value,
 															title.textContent,
 															price.textContent ))
+	}
+	//cart
+	if(doc.location.pathname == '/sakila/cart.php'){
+		const deleteCartItemBtns = doc.querySelectorAll('.cart-delete')
+
+		deleteCartItemBtns.forEach((btn) => {
+			btn.addEventListener('click', (e) => deleteCartItem(e.target.dataset.item))
+		})
 	}
 
 })(console.log, document, new XMLHttpRequest)
