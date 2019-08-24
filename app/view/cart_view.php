@@ -5,7 +5,7 @@
         );
 ?>
 
-<?php if( isset( $_SESSION['cart'] ) ): ?>
+<?php if( $cartNotEmpty ): ?>
     
     <div class="container">
         <div class="card w-75 mx-auto mt-2">
@@ -26,28 +26,28 @@
                         <?php
                             $totalPayment = 0; 
                             foreach( $_SESSION['cart'] as $cartItem ):
-                            $objCartItem = json_decode($cartItem);
                         ?>
-                        <tr>
-                            <td> <?php echo $objCartItem->filmId ?> </td>
-                            <td> <?php echo $objCartItem->title ?> </td>
-                            <td> $<?php echo $objCartItem->price ?> </td>
-                            <td> <a href="#" class="cart-delete" 
-                                    data-item=" <?php echo $objCartItem->filmId ?> ">
+                        <tr id="<?php echo 'item-' . $cartItem['filmId'] ?>">
+                            <td> <?php echo $cartItem['filmId'] ?> </td>
+                            <td> <?php echo $cartItem['title'] ?> </td>
+                            <td class="item-price"> <?php echo $cartItem['price'] ?> </td>
+                            <td> 
+                                <a href="#" class="cart-delete" 
+                                    data-item=" <?php echo $cartItem['filmId'] ?> ">
                                     &times;
                                 </a> 
                             </td>
                         </tr>
                         <?php
-                            $totalPayment += floatval($objCartItem->price);
+                            $totalPayment += floatval($cartItem['price']);
                             endforeach; 
                         ?>
                         <tr>
                             <td colspan="2" class="text-right">
                                 <strong>Total:</strong>
                             </td>
-                            <td colspan="2">
-                                <strong> $<?php echo $totalPayment; ?> </strong>
+                            <td colspan="2" class="font-weight-bold" id="cart-total">
+                                $<?php echo $totalPayment; ?>
                             </td>
                         </tr>
                     </tbody>

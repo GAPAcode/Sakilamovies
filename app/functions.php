@@ -32,13 +32,10 @@ function getSelectCity($conexion, $c_id, $user_city)
     return $content;
 }
 
-function isOnTheCart( $theFilmJson , $theCartArray){
-    $filmObj = json_decode($theFilmJson);
+function isOnTheCart( $theFilm , $theCartArray){
     
-    foreach ($theCartArray as $cartItem) {
-       $cartItemObj = json_decode($cartItem);
-        
-       if($cartItemObj->filmId === $filmObj->filmId ){
+    foreach ($theCartArray as $cartItem){
+       if($cartItem['filmId'] == $theFilm['filmId'] ){
             return true;
         }
     }
@@ -46,13 +43,14 @@ function isOnTheCart( $theFilmJson , $theCartArray){
 
 function addToCart($filmJson){
     session_start();
+    $filmObj = json_decode($filmJson,true);
 
     if(!isset($_SESSION['cart'])){
         $_SESSION['cart'] = array();
     }
 
-    if(!isOntheCart( $filmJson , $_SESSION['cart'] ) ){
-        array_push($_SESSION['cart'], $filmJson );
+    if(!isOntheCart( $filmObj , $_SESSION['cart'] ) ){
+        array_push($_SESSION['cart'], $filmObj );
     }
     else {
         return 'The film is on the cart';
@@ -61,13 +59,13 @@ function addToCart($filmJson){
 }
 
 function deleteCartItem( $filmId ){
-    // session_start();
-    // array_filter($_SESSION['cart'], (function($cartItem){
-    //     $cartItemObj = json_decode($cartItem);
-    //     echo $cartItemObj->filmId;
-    //     return $cartItemObj->filmId != $_POST['deleteItem'];
-    // }));
-    // echo var_dump($_SESSION['cart']);
+    session_start();
+
+    $_SESSION['cart'] = array_filter($_SESSION['cart'],
+            function($cartItem) use ($filmId){
+                return(intval($cartItem['filmId']) !== intval($filmId));
+            }   
+        );
 }
 
 //Disparadores

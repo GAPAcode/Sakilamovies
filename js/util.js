@@ -65,11 +65,27 @@
 		
 	}
 
+	const refreshTotal = () => {
+		const totalAmount = doc.querySelector('#cart-total')
+		const itemPrices =  doc.querySelectorAll('.item-price')
+
+		let total = 0;
+
+		itemPrices.forEach(item => {
+			total += parseFloat(item.textContent)
+		})
+
+		totalAmount.textContent = `$${total}`
+	}
+
 	const deleteCartItem = (filmId) => {
+		const itemRow = doc.querySelector(`#item-${parseInt(filmId)}`)
+
 		ajax.open('POST','./app/functions.php',true)
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
-				alert(`${ajax.response}`)
+				itemRow.innerHTML = ''
+				refreshTotal()
 			}else if (ajax.status === NOT_FOUND){
 				alert(`Error ${ajax.status}, ${ajax.statusText}`)
 			}
