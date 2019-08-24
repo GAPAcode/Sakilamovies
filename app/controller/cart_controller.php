@@ -8,7 +8,7 @@ if(!isset($_SESSION['user'])){
 }
 
 if(isset($_SESSION['cart'])){
-    $cartNotEmpty = (count($_SESSION['cart']) <= 0)? false : true;
+    $cartNotEmpty = ( count($_SESSION['cart']) <= 0 )? false : true;
 }else{
     $cartNotEmpty = false;
 }

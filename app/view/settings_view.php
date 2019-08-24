@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg bg-dark">
 	<div class="container">
-		<a href="index.php" class="navbar-brand text-light">SAKILA <small class="font-weight-light">movies</small></a>
+		<a href="index" class="navbar-brand text-light">SAKILA <small class="font-weight-light">movies</small></a>
 
 
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link btn btn-secondary px-3" href="index.php">
+				<a class="nav-link btn btn-secondary px-3" href="index">
 					<i class="fa fa-home"></i> Index
 				</a>
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link btn btn-danger ml-1 px-3" href="index.php?logout=yes">
+				<a class="nav-link btn btn-danger ml-1 px-3" href="index?logout=yes">
 					<i class="fa fa-sign-out"></i> Logout
 				</a>
 			</li>

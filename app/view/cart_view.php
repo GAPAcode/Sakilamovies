@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <a href="index.php" class="btn btn-success w-100 font-weight-bold"> 
+                    <a href="index" class="btn btn-success w-100 font-weight-bold"> 
                         Back to Film Index
                     </a>
                 </div>

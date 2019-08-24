@@ -56,7 +56,7 @@ class Management extends Conexion
 		if (isset($_COOKIE[$cookieSessionName])) {
 			setcookie($cookieSessionName,"",time()-1);
 		}
-		header("location:index.php");
+		header("location:index");
 	}
 	public function new_film($name,$description,$release,$language,$rental,$length,$rating,$first_actor,$category)
 	{

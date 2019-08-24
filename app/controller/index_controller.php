@@ -1,6 +1,6 @@
 <?php 
 require_once 'app/model/index_model.php';
-	$thispage = $_SERVER['PHP_SELF'];
+	$thispage = str_replace('.php','',$_SERVER['PHP_SELF']);
 	$index = new index();
 
 	$index->set_pag_actual(1);
@@ -18,7 +18,7 @@ require_once 'app/model/index_model.php';
 			}
 			$_SESSION["user"] = $index->get_session_username();
 			$_SESSION["profile"] = $index->get_session_profile_pic();
-			header("location:index.php");
+			header("location:index");
 		}
 	}
 
@@ -37,7 +37,7 @@ require_once 'app/model/index_model.php';
 
 		if ($_GET["p"] == 1) {
 			$index->set_pag_actual(1);
-			header("location:index.php" . (isset($_GET["c"])?"?c=" . $index->get_categoria_actual():"") . (isset($_GET["s"])?"&s=" . $index->get_busqueda_actual():""));
+			header("location:index" . (isset($_GET["c"])?"?c=" . $index->get_categoria_actual():"") . (isset($_GET["s"])?"&s=" . $index->get_busqueda_actual():""));
 		}
 
 		$index->set_pag_actual($_GET["p"]);

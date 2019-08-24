@@ -2,7 +2,7 @@
 require_once 'app/model/settings_model.php';
 session_start();
 if (!isset($_SESSION["user"])) {
-	header("location:index.php");
+	header("location:index");
 }
 
 $thispage = $_SERVER['PHP_SELF'];
@@ -26,7 +26,7 @@ if (isset($_POST["save"])) {
 			$_SESSION["profile"] = $_FILES["st_pic"]["name"];
 		}
 	}
-	header("location:settings.php");
+	header("location:settings");
 }
 
 $countries = $settings->get_countries();

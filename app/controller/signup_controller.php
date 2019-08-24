@@ -15,7 +15,7 @@
 			$_POST["su_pass"],
 			$_FILES['su_pic']["name"]);
 		if ($exito == 1) {
-			header("location:index.php");
+			header("location:index");
 		}
 	}
 

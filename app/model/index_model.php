@@ -34,7 +34,7 @@
 			<nav class="navbar navbar-expand-lg bg-dark">
 			<div class="container">
 				<!-- brand logo -->
-				<a href="index.php" class="navbar-brand text-light">
+				<a href="index" class="navbar-brand text-light">
 					SAKILA <small class="font-weight-light">movies</small>
 				</a>
 		
@@ -44,25 +44,25 @@
 				//vista si hay usuario en sesión
 				$content = $content . '
 					<li class="nav-item">
-						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="cart.php" title="Film Cart">
+						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="cart" title="Film Cart">
 							<i class="fa fa-shopping-cart"></i>
 						</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link btn btn-secondary px-3" href="index.php">
+						<a class="nav-link btn btn-secondary px-3" href="index">
 							<i class="fa fa-home"></i> Index
 						</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link btn btn-danger ml-1 px-3" href="index.php?logout=yes">
+						<a class="nav-link btn btn-danger ml-1 px-3" href="index?logout=yes">
 							<i class="fa fa-sign-out"></i> Logout
 						</a>
 					</li>
 
 					<li class="nav-item my-auto">
-						<a class="nav-link ml-2 btn btn-light my-auto pt-1 pb-0 px-1" href="settings.php">
+						<a class="nav-link ml-2 btn btn-light my-auto pt-1 pb-0 px-1" href="settings">
 							<i class="fa fa-gear settings-icon"></i>
 						</a>
 					</li>'
@@ -74,7 +74,7 @@
 			} else {
 				$content = $content . '
 				<li class="nav-item">
-					<a class="nav-link btn btn-secondary px-3" href="index.php">
+					<a class="nav-link btn btn-secondary px-3" href="index">
 						<i class="fa fa-home"></i> Index
 					</a>
 				</li>
@@ -84,7 +84,7 @@
 					</button>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-light btn btn-success ml-1 px-3" href="signup.php">
+					<a class="nav-link text-light btn btn-success ml-1 px-3" href="signup">
 						<i class="fa fa-sign-in"></i> Sign up
 					</a>
 				</li>';
@@ -125,7 +125,7 @@
 				if (isset($_COOKIE[$cookieSessionName])) {
 					setcookie($cookieSessionName,"",time()-1);
 				}
-				header("location:index.php");
+				header("location:index");
 		}
 
 		public function get_film_list(){
@@ -193,7 +193,7 @@
 		}
 
 		public function get_paginacion(){
-			$thispage = $_SERVER['PHP_SELF'];
+			$thispage = str_replace('.php', '' , $_SERVER['PHP_SELF'] );
 			$pag_min = 1;
 
 			if ($this->total_pags <= $this->pag_size) {

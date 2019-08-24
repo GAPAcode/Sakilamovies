@@ -14,7 +14,7 @@ if (isset($_POST["m_login_send"])) {
 		if (isset($_POST["m_remember"])) {
 			setcookie("c_user_manager",	$management->session_staff->get_username(),time()+50000);
 		}
-		header("location:management.php");
+		header("location:management");
 	}
 }
 
@@ -36,12 +36,12 @@ if (isset($_POST["newfilm"])) {
 		);
 
 	if ($exito > 0) {
-		header("location:management.php");
+		header("location:management");
 	}
 }
 if (isset($_POST["add_inv"])) {
 	$management->add_stock($_POST["ai_store"],$_POST["ai_film"],$_POST["ai_quantity"]);
-	header("location:management.php?view=film_inventory");
+	header("location:management?view=film_inventory");
 }
 
 if (isset($_SESSION['user_manager'])) {

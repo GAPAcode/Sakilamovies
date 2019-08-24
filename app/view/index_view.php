@@ -53,7 +53,7 @@
 	<!-- SubMenu de páginas -->
 	<ul id="sup_nav" class="nav bg-info font-weight-light">
 		<li class="ml-auto nav-item">
-			<a class="nav-link text-light my-1" href="index.php">
+			<a class="nav-link text-light my-1" href="index">
 				Index
 			</a>
 		</li>
@@ -102,7 +102,7 @@
 								<h6><i class="fa fa-film mr-2"></i><?php echo ($film->get_titulo()) ?></h6>
 							</div>
 							<div class="card-body p-0 bg-dark">
-								<img src="../uploads/test250x250.png" class="img-fluid w-100">
+								<img src="../../uploads/test250x250.png" class="img-fluid w-100">
 								<div class="container badges">
 									<span class="mx-0 badge badge-primary">
 										<?php echo ($film->get_categoria()) ?>
@@ -113,7 +113,7 @@
 								</div>
 							</div>
 							<div class="card-footer p-0 bg-dark rounded-bottom">
-								<a href="film.php?fid=<?php echo($film->get_id()); ?>" class="film-btn btn btn-primary w-100">
+								<a href="film?fid=<?php echo($film->get_id()); ?>" class="film-btn btn btn-primary w-100">
 									<?php echo ($film->get_precio()) ?>$
 								</a>
 							</div>

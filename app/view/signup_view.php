@@ -41,7 +41,7 @@
 		</div>
 
 		<div class="card-footer">
-			<a href="index.php" class="btn btn-secondary">Back to Sakila</a>
+			<a href="index" class="btn btn-secondary">Back to Sakila</a>
 		</div>
 	</div>
 </div>

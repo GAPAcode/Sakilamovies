@@ -1,5 +1,5 @@
 ;
-((c , doc , ajax, json) => {
+((c , doc , ajax) => {
 	const OK = 200,
 	NOT_FOUND = 404
 
@@ -107,7 +107,7 @@
 	})
 	
 	// Indice
-	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index.php') {
+	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index') {
 		const loginModal = doc.querySelector('#login'),
 		search = doc.querySelector('#film_search'),
 		searchInput = doc.querySelector('#s_input'),
@@ -135,7 +135,7 @@
 	}
 	
 	// settings
-	if(doc.location.pathname == "/sakila/settings.php"){
+	if(doc.location.pathname == "/sakila/settings"){
 		form = doc.querySelector('#settings')
 		city = doc.querySelector('#city')
 		inputCity = doc.querySelector('#select_city')
@@ -144,7 +144,7 @@
 	}
 
 	// Film
-	if(doc.location.pathname == '/sakila/film.php'){
+	if(doc.location.pathname == '/sakila/film'){
 		const addFilmBtn = doc.querySelector('#rent-btn'),
 		title = doc.querySelector('#film-title'),
 		price = doc.querySelector('#film-price')
@@ -155,8 +155,9 @@
 															title.textContent,
 															price.textContent ))
 	}
+	
 	//cart
-	if(doc.location.pathname == '/sakila/cart.php'){
+	if(doc.location.pathname == '/sakila/cart'){
 		const deleteCartItemBtns = doc.querySelectorAll('.cart-delete')
 
 		deleteCartItemBtns.forEach((btn) => {
