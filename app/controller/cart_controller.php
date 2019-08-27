@@ -1,4 +1,5 @@
 <?php 
+
 require_once 'app/model/cart_model.php';
 $cart = new Cart();
 

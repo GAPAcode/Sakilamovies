@@ -76,7 +76,7 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form action="index" method="post"  >
+				<form action="/sakila/index" method="post"  >
 					<div class="form-group">
 						<label for="l_user"><i class="fa fa-user"></i> Username</label>
 						<input id="l_user" type="text" name="l_user" class="form-control" autocomplete="username">

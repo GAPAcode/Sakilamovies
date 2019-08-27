@@ -9,45 +9,51 @@
 <body class="bg-secondary">
 
 <?php 
-	if(isset($_SERVER['REDIRECT_QUERY_STRING']) ){
-		$request = str_replace('?'. $_SERVER['REDIRECT_QUERY_STRING'],'',$_SERVER['REQUEST_URI']);
-	}
-	else{
-		$request = $_SERVER['REQUEST_URI'];
-	}
+	require_once 'app/modules/AltoRouter.php';
 
-	switch ($request) {
-		case '/sakila/':
-			require_once 'app/controller/index_controller.php'; 
-			break;
+	$router = new AltoRouter;
+	$router->setBasePath('/sakila');
 
-		case '/sakila/index':
-			require_once 'app/controller/index_controller.php';
-			break;
+	$router->map('GET','/',function() {
+		require_once __DIR__ .'/app/controller/index_controller.php';
+	});
 
-		case '/sakila/cart':
-			require_once 'app/controller/cart_controller.php';
-			break;
+	$router->map('GET|POST','/index',function() {
+		require_once __DIR__ . '/app/controller/index_controller.php';
+	});
 
-		case '/sakila/settings':
-			require_once 'app/controller/settings_controller.php';
-			break;
+	$router->map('GET|POST','/signup',function() {
+		require_once __DIR__ . '/app/controller/signup_controller.php';
+	});
 
-		case '/sakila/signup':
-			require_once 'app/controller/signup_controller.php';
-			break;
+	$router->map('GET|POST','/film/[i:id]/', function( $id ) {
+		require_once __DIR__ .'/app/controller/film_controller.php';
+	});
 
-		case '/sakila/film':
-			require_once 'app/controller/film_controller.php';
-			break;
+	$router->map('GET|POST','/cart', function() {
+		require_once __DIR__ .'/app/controller/cart_controller.php';
+	});
 
-		case '/sakila/management':
-			require_once 'app/controller/management_controller.php';
-			break;
+	$router->map('GET|POST','/settings', function() {
+		require_once __DIR__ .'/app/controller/settings_controller.php';
+	});
 
-		default:
-			require_once 'app/view/404.php';
-			break;
+	$router->map('GET|POST','/management', function() {
+		require_once __DIR__ .'/app/controller/management_controller.php';
+	});
+
+	$router->map('GET|POST','/app/functions/', function() {
+		require_once __DIR__ .'/app/functions.php';
+	});
+
+	$match = $router->match();
+
+	// call closure or throw 404 status
+	if( is_array($match) && is_callable( $match['target'] ) ) {
+		call_user_func_array( $match['target'], $match['params'] ); 
+	} else {
+		// no route was matched
+		require_once 'app/view/404.php';
 	}
 ?>
 

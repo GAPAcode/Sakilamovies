@@ -2,8 +2,8 @@
 require_once 'app/model/film_model.php';
 $thispage = $_SERVER['PHP_SELF'];
 
-if (isset($_GET["fid"])) {
-	$film = new Film($_GET["fid"]);
+if (isset($id)) {
+	$film = new Film($id);
 }
 else {
 	header('location:index');

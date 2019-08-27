@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="card-body">
-			<form id="settings" class="w-100" action="<?php echo $thispage ?>" method="POST" enctype="multipart/form-data">
+			<form id="settings" class="w-100" action="/sakila/settings" method="POST" enctype="multipart/form-data">
 				<h3>General</h3>
 				<hr>
 				

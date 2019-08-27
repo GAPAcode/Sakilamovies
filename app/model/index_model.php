@@ -34,7 +34,7 @@
 			<nav class="navbar navbar-expand-lg bg-dark">
 			<div class="container">
 				<!-- brand logo -->
-				<a href="index" class="navbar-brand text-light">
+				<a href="/sakila/index" class="navbar-brand text-light">
 					SAKILA <small class="font-weight-light">movies</small>
 				</a>
 		
@@ -44,19 +44,19 @@
 				//vista si hay usuario en sesión
 				$content = $content . '
 					<li class="nav-item">
-						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="cart" title="Film Cart">
+						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="/sakila/cart" title="Film Cart">
 							<i class="fa fa-shopping-cart"></i>
 						</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link btn btn-secondary px-3" href="index">
+						<a class="nav-link btn btn-secondary px-3" href="/sakila/index">
 							<i class="fa fa-home"></i> Index
 						</a>
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link btn btn-danger ml-1 px-3" href="index?logout=yes">
+						<a class="nav-link btn btn-danger ml-1 px-3" href="/sakila/index?logout=yes">
 							<i class="fa fa-sign-out"></i> Logout
 						</a>
 					</li>
@@ -74,7 +74,7 @@
 			} else {
 				$content = $content . '
 				<li class="nav-item">
-					<a class="nav-link btn btn-secondary px-3" href="index">
+					<a class="nav-link btn btn-secondary px-3" href="/sakila/index">
 						<i class="fa fa-home"></i> Index
 					</a>
 				</li>
@@ -125,7 +125,7 @@
 				if (isset($_COOKIE[$cookieSessionName])) {
 					setcookie($cookieSessionName,"",time()-1);
 				}
-				header("location:index");
+				header("location:/sakila/index");
 		}
 
 		public function get_film_list(){

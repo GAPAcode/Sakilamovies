@@ -45,7 +45,7 @@
 			'price' : price
 		}
 
-		ajax.open('POST','./app/functions.php',true)
+		ajax.open('POST','/sakila/app/functions/',true)
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
 
@@ -65,22 +65,9 @@
 		
 	}
 
-	const refreshTotal = () => {
-		const totalAmount = doc.querySelector('#cart-total')
-		const itemPrices =  doc.querySelectorAll('.item-price')
-
-		let total = 0;
-
-		itemPrices.forEach(item => {
-			total += parseFloat(item.textContent)
-		})
-
-		totalAmount.textContent = `$${total}`
-	}
-
 	const deleteCartItem = (filmId) => {
 		const itemRow = doc.querySelector(`#item-${parseInt(filmId)}`)
-
+		
 		ajax.open('POST','./app/functions.php',true)
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
@@ -92,6 +79,19 @@
 		})
 		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
 		ajax.send( encodeURI(`deleteItem=${filmId}`) )
+	}
+	
+	const refreshTotal = () => {
+		const totalAmount = doc.querySelector('#cart-total')
+		const itemPrices =  doc.querySelectorAll('.item-price')
+
+		let total = 0;
+
+		itemPrices.forEach(item => {
+			total += parseFloat(item.textContent)
+		})
+
+		totalAmount.textContent = `$${total}`
 	}
 
 	//general
@@ -144,18 +144,16 @@
 	}
 
 	// Film
-	if(doc.location.pathname == '/sakila/film'){
+	if(doc.location.pathname.includes('/sakila/film/')){
 		const addFilmBtn = doc.querySelector('#rent-btn'),
 		title = doc.querySelector('#film-title'),
 		price = doc.querySelector('#film-price')
 		
-		c()
-
 		addFilmBtn.addEventListener('click', (e) => addToCart(e.target.value,
 															title.textContent,
 															price.textContent ))
 	}
-	
+
 	//cart
 	if(doc.location.pathname == '/sakila/cart'){
 		const deleteCartItemBtns = doc.querySelectorAll('.cart-delete')

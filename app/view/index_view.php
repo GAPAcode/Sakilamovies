@@ -113,7 +113,7 @@
 								</div>
 							</div>
 							<div class="card-footer p-0 bg-dark rounded-bottom">
-								<a href="film?fid=<?php echo($film->get_id()); ?>" class="film-btn btn btn-primary w-100">
+								<a href="film/<?php echo($film->get_id()); ?>/" class="film-btn btn btn-primary w-100">
 									<?php echo ($film->get_precio()) ?>$
 								</a>
 							</div>
