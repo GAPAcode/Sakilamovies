@@ -1,9 +1,6 @@
 <!-- Barra de navegacion -->
 <?php 
-	echo $index->get_navbar(
-			$index->get_session_username(),
-			$index->get_session_profile_pic()
-);
+	echo $index->get_navbar();
 ?>
 <!-- Barra de navegacion -->
 
@@ -19,21 +16,21 @@
 		<!-- The slideshow -->
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="../uploads/test1024x300.jpg" class="img-fluid w-100" alt="Los Angeles">
+				<img src="http://localhost/uploads/test1024x300.jpg" class="img-fluid w-100" alt="Los Angeles">
 				<div class="carousel-caption">
 					<h3>Articulo 1</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur.</p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="../uploads/test1024x300.jpg" class="img-fluid w-100" alt="Chicago">
+				<img src="http://localhost/uploads/test1024x300.jpg" class="img-fluid w-100" alt="Chicago">
 				<div class="carousel-caption">
 					<h3>Articulo 2</h3>
 					<p>Lorem consectetur adipisicing elit, sed do eiusmod.</p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="../uploads/test1024x300.jpg" class="img-fluid w-100" alt="New York">
+				<img src="http://localhost/uploads/test1024x300.jpg" class="img-fluid w-100" alt="New York">
 				<div class="carousel-caption">
 					<h3>Articulo 3</h3>
 					<p>Lorem ipsum dolor mollit anim id est laborum.</p>
@@ -53,13 +50,13 @@
 	<!-- SubMenu de páginas -->
 	<ul id="sup_nav" class="nav bg-info font-weight-light">
 		<li class="ml-auto nav-item">
-			<a class="nav-link text-light my-1" href="index">
+			<a class="nav-link text-light my-1" href="/sakila/index">
 				Index
 			</a>
 		</li>
 		<li>
-			<form id="film_search" class="form-inline p-1" action="<?php $thispage ?>" method="get">
-				<input id="s_input" class="form-control mr-1" type="text" name="s" placeholder="Search">
+			<form id="film_search" class="form-inline p-1" action="/sakila/" method="get">
+				<input id="s_input" class="form-control mr-1" type="text" placeholder="Search">
 				<input type="submit" class="btn btn-warning font-weight-bold" value="Search">
 			</form>
 		</li>
@@ -82,7 +79,9 @@
 					</a>
 					<div id="cat1" class="collapse">
 						<?php foreach ($categorias as $categoria): ?>
-						<a class="dropdown-item text-light" href="<?php echo $thispage . '?c=' . $categoria->get_nombre() ?>"><?php echo $categoria->get_nombre(); ?></a>
+						<a class="dropdown-item text-light" href="<?php echo '/sakila/category/' . $categoria->get_nombre() ?>">
+							<?php echo $categoria->get_nombre(); ?>
+						</a>
 						<?php endforeach ?>
 					</div>
 				</li>
@@ -102,7 +101,7 @@
 								<h6><i class="fa fa-film mr-2"></i><?php echo ($film->get_titulo()) ?></h6>
 							</div>
 							<div class="card-body p-0 bg-dark">
-								<img src="../../uploads/test250x250.png" class="img-fluid w-100">
+								<img src="http://localhost/uploads/test250x250.png" class="img-fluid w-100">
 								<div class="container badges">
 									<span class="mx-0 badge badge-primary">
 										<?php echo ($film->get_categoria()) ?>
@@ -113,7 +112,7 @@
 								</div>
 							</div>
 							<div class="card-footer p-0 bg-dark rounded-bottom">
-								<a href="film/<?php echo($film->get_id()); ?>/" class="film-btn btn btn-primary w-100">
+								<a href="/sakila/film/<?php echo($film->get_id()); ?>/" class="film-btn btn btn-primary w-100">
 									<?php echo ($film->get_precio()) ?>$
 								</a>
 							</div>

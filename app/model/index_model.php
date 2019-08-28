@@ -240,10 +240,7 @@
 			'<ul class="pagination">
 				<li class="page-item '. 
 					($this->pag_actual - 1 == 0 || $this->total_reg == 0?'disabled':'') . '">
-					<a class="page-link" href="'. $thispage . '?p=' . ($this->pag_actual - 1) . 
-					(isset($this->cat_actual)?'&c=' . $this->cat_actual:'') .
-					(isset($this->busqueda_actual)?'&s=' . $this->busqueda_actual:'')
-					.'">
+					<a class="page-link" href="' . $this->getPaginationHref( $this->pag_actual - 1 ) . '">
 						Previous
 					</a>
 				</li>'
@@ -251,9 +248,7 @@
 				for ($i = $pag_min; $i <= $pag_limit; $i++){
 					echo('
 					<li class="page-item '. ($this->pag_actual == $i ? 'active' : '') . '">
-						<a class="page-link" href="' . $thispage . '?p=' . $i . 
-						(isset($this->cat_actual)?'&c=' . $this->cat_actual:'') . 
-						(isset($this->busqueda_actual)?'&s=' . $this->busqueda_actual:'') .'">' .
+						<a class="page-link" href="' . $this->getPaginationHref($i) . '">' .
 							$i . 
 						'</a>
 					</li>
@@ -261,14 +256,24 @@
 				}
 			echo ('
 				<li class="page-item '. ($this->pag_actual == $this->total_pags || $this->total_reg == 0? 'disabled' : '') . '">
-					<a class="page-link" href="' . $thispage . '?p=' .  ($this->pag_actual + 1) . 
-					(isset($this->cat_actual)?'&c=' . $this->cat_actual:'') .
-					(isset($this->busqueda_actual)?'&s=' . $this->busqueda_actual:'') .'">
+					<a class="page-link" href="'. $this->getPaginationHref( $this->pag_actual + 1 ) .'">
 						Next
 					</a>
 				</li>
 			</ul>'
 			);
+		}
+
+		private function getPaginationHref($page){
+			$href = '/sakila/page/' . $page;
+
+			if(isset($this->cat_actual))
+				$href = '/sakila/category/' . $this->cat_actual . '/' . $page;
+
+			if (isset($this->busqueda_actual))
+				$href = '/sakila/search/' . $this->busqueda_actual .'/'. $page;
+			
+			return $href;
 		}
 
 		public function get_results_header(){

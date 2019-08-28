@@ -15,15 +15,27 @@
 	
 	$router->setBasePath('/sakila');
 
-	$router->map('GET|POST','/',function() {
+	$router->map('GET|POST','/', function() {
 		require_once __DIR__ .'/app/controller/index_controller.php';
 	});
 
-	$router->map('GET|POST','/index',function() {
+	$router->map('GET|POST','/index', function() {
 		require_once __DIR__ . '/app/controller/index_controller.php';
 	});
 
-	$router->map('GET|POST','/signup',function() {
+	$router->map('GET|POST','/page/[i:page]', function( $page ) {
+		require_once __DIR__ . '/app/controller/index_controller.php';
+	});
+
+	$router->map('GET|POST','/search/[a:search]/[i:page]?', function($search, $page = null) {
+		require_once __DIR__ .'/app/controller/index_controller.php';
+	});
+	
+	$router->map('GET|POST','/category/[a:cat]/[i:page]?', function($category, $page = null) {
+		require_once __DIR__ .'/app/controller/index_controller.php';
+	});
+
+	$router->map('GET|POST','/signup', function() {
 		require_once __DIR__ . '/app/controller/signup_controller.php';
 	});
 

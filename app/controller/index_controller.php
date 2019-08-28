@@ -21,27 +21,35 @@ require_once 'app/model/index_model.php';
 			header("location:index");
 		}
 	}
-
+	
 	if (isset($_GET["logout"])) {
 		$index->logout("c_username");
 	}
-	if (isset($_GET["s"])) {
-		$index->set_busqueda_actual($_GET["s"]);
-	}
 
-	if (isset($_GET["c"])) {
-		$index->set_categoria_actual($_GET["c"]);
-	}
-
-	if (isset($_GET["p"])) {
-
-		if ($_GET["p"] == 1) {
-			$index->set_pag_actual(1);
-			header("location:index" . (isset($_GET["c"])?"?c=" . $index->get_categoria_actual():"") . (isset($_GET["s"])?"&s=" . $index->get_busqueda_actual():""));
+	if(isset($category)){
+		$index->set_categoria_actual($category);
+		
+		if(isset($page)){
+			if ($page == 1) {
+				$index->set_pag_actual(1);
+				header("location:/sakila/" . $category . '/');
+			}
+			$index->set_pag_actual($page);
 		}
-
-		$index->set_pag_actual($_GET["p"]);
 	}
+	if (isset($search)) {
+		$index->set_busqueda_actual($search);
+	}
+
+	if(isset($page)){
+		if ($page == 1) {
+			$index->set_pag_actual(1);
+			header("location:/sakila/");
+		}
+		$index->set_pag_actual($page);
+	}
+
+
 
 	$film_list = $index->get_film_list();
 

@@ -13,14 +13,18 @@
 		showRedirect()
 	}
 
-	const checkEmpty = (e,obj) => {
+	const checkEmptyAndSearch = (e,obj) => {
+		e.preventDefault()
 		if(obj.value === '' || obj.value === null){
-			e.preventDefault()
-			alert('No has ingresado nada a la busqueda')
+			alert('Your search is empty')
 		}else{
-			const icon = doc.querySelector('#redirect')
-			icon.style = 'display:block'
+			showRedirect();
+			searchRedirect(obj.value);
 		}
+	}
+	
+	const searchRedirect = (search) => {
+		doc.location.href = `http://localhost/sakila/search/${search}`
 	}
 	
 	const getCity = (e,city,inputCity) => {
@@ -159,9 +163,14 @@
 			})
 		}
 		
-		search.addEventListener( 'submit', (e) => checkEmpty(e,searchInput))
+		search.addEventListener( 'submit', (e) => {
+			checkEmptyAndSearch(e,searchInput)
+		})
 		
 		loginModal.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
+	
+	
+	
 	}
 	
 	// settings
