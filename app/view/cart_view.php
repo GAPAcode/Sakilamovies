@@ -1,13 +1,11 @@
 <?php 
-    echo $cart->get_navbar(
-            $cart->get_session_username(), 
-            $cart->get_session_profile_pic()
-        );
+    echo $cart->get_navbar();
 ?>
 
-<?php if( $cartNotEmpty ): ?>
+
     
-    <div class="container">
+<div class="container" id="cart-container">
+    <?php if( $cartNotEmpty ): ?>
         <div class="card w-75 mx-auto mt-2">
             <div class="card-header">
                 <h2>Your film Cart</h2>
@@ -25,7 +23,7 @@
                     <tbody>
                         <?php
                             $totalPayment = 0; 
-                            foreach( $_SESSION['cart'] as $cartItem ):
+                            foreach( $cart->cartItems as $cartItem ):
                         ?>
                         <tr id="<?php echo 'item-' . $cartItem['filmId'] ?>">
                             <td> <?php echo $cartItem['filmId'] ?> </td>
@@ -56,17 +54,15 @@
             </div>
 
             <div class="card-footer text-center">
-                <button class="btn btn-success w-50">
+                <a class="btn btn-success w-50" href="/sakila/cart/checkout/">
                     Rent Movies Now!
-                </button>
+                </a>
             </div>
         </div>
-    </div>
    
 
     <?php else: ?>
 
-        <div class="container">
             <div class="card w-50 mx-auto mt-5">
                 <div class="card-header">
                     <h3 class="text-center">The cart is empty!</h3>
@@ -88,6 +84,6 @@
                     </a>
                 </div>
             </div>
-        </div>
-
+        
     <?php endif; ?>
+</div>

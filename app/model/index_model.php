@@ -19,6 +19,8 @@
 		private $busqueda_actual;
 		private $session_username;
 		private $session_profile_pic;
+		protected $user_id;
+
 
 		function __construct(){
 			parent::__construct();
@@ -26,10 +28,26 @@
 			if ( isset($_SESSION['user']) && isset( $_SESSION['profile'] ) ) {
 				$this->session_username = $_SESSION['user'];
 				$this->session_profile_pic = $_SESSION['profile'];
+				$this->user_id = $this->getUserId();
 			}
 		}
-		
+		private function getUserId(){
+			$query = 'SELECT customer_id FROM customer WHERE username = :username';
+
+			$resultado = $this->conexion_db->prepare($query);
+			$resultado->execute(array(':username' => $this->session_username));
+			
+			$id = $resultado->fetch(PDO::FETCH_ASSOC);
+
+			return $id['customer_id'];
+		}
+
 		public function get_navbar(string $username = null,string $prof_pic = null){
+			if (isset($this->session_username) && $username == null) {
+				$username = $this->session_username;
+				$prof_pic = $this->session_profile_pic;
+			}
+
 			$content = '
 			<nav class="navbar navbar-expand-lg bg-dark">
 			<div class="container">
@@ -43,6 +61,12 @@
 			if ($username != null) {
 				//vista si hay usuario en sesión
 				$content = $content . '
+					<li class="nav-item">
+						<a class="nav-link text-light text-center bg-info border border-secondary rounded-circle film-cart" href="/sakila/rentals" title="Your Film Rentals">
+							<i class="fa fa-film"></i>
+						</a>
+					</li>
+
 					<li class="nav-item">
 						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="/sakila/cart" title="Film Cart">
 							<i class="fa fa-shopping-cart"></i>

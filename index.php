@@ -9,12 +9,13 @@
 <body class="bg-secondary">
 
 <?php 
-	require_once 'app/modules/AltoRouter.php';
+	require_once 'app/libs/AltoRouter.php';
 
 	$router = new AltoRouter;
+	
 	$router->setBasePath('/sakila');
 
-	$router->map('GET','/',function() {
+	$router->map('GET|POST','/',function() {
 		require_once __DIR__ .'/app/controller/index_controller.php';
 	});
 
@@ -32,6 +33,18 @@
 
 	$router->map('GET|POST','/cart', function() {
 		require_once __DIR__ .'/app/controller/cart_controller.php';
+	});
+
+	$router->map('GET|POST','/cart/[a:a]/', function($checkout) {
+		require_once __DIR__ .'/app/controller/cart_controller.php';
+	});
+
+	$router->map('GET|POST','/rentals', function() {
+		require_once __DIR__ .'/app/controller/rentals_controller.php';
+	});
+
+	$router->map('GET|POST','/rentals/[a:return]/[i:id]', function($return,$id) {
+		require_once __DIR__ .'/app/controller/rentals_controller.php';
 	});
 
 	$router->map('GET|POST','/settings', function() {

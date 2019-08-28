@@ -1,10 +1,10 @@
 <?php 
-require_once 'app/model/obj_connection.php';
+require_once 'app/model/index_model.php';
 
 /**
  * 
  */
-class Settings extends Conexion
+class Settings extends Index
 {
 	function __construct()
 	{

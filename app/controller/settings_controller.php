@@ -1,13 +1,13 @@
 <?php 
 require_once 'app/model/settings_model.php';
-session_start();
-if (!isset($_SESSION["user"])) {
-	header("location:index");
-}
 
 $thispage = $_SERVER['PHP_SELF'];
 $settings = new Settings();
 $user_data = $settings->get_user_data($_SESSION["user"]);
+
+if (!isset($_SESSION["user"])) {
+	header("location:/sakila/index");
+}
 
 if (isset($_POST["save"])) {
 	$exito = $settings->update_user(
@@ -26,11 +26,12 @@ if (isset($_POST["save"])) {
 			$_SESSION["profile"] = $_FILES["st_pic"]["name"];
 		}
 	}
-	header("location:settings");
+	header("location:/sakila/settings");
 }
 
 $countries = $settings->get_countries();
 $cities = $settings->get_city();
+
 require_once 'app/view/settings_view.php';
 $settings->close_connection();
  ?>

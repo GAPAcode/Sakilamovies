@@ -5,7 +5,13 @@ $cart = new Cart();
 
 
 if(!isset($_SESSION['user'])){
-    header('location:index.php');
+    header('location:/sakila/');
+}
+
+if(isset($checkout)){
+    $cart->checkoutCart();
+
+    // header('location:/sakila/');
 }
 
 if(isset($_SESSION['cart'])){

@@ -66,6 +66,15 @@ function deleteCartItem( $filmId ){
                 return(intval($cartItem['filmId']) !== intval($filmId));
             }   
         );
+    
+    return isCartEmpty()?'the cart is empty':'';
+    
+}
+
+function isCartEmpty(){
+    if (count($_SESSION['cart']) <= 0) {
+        return true;
+    }
 }
 
 //Disparadores

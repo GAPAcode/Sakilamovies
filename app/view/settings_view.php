@@ -1,27 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-dark">
-	<div class="container">
-		<a href="index" class="navbar-brand text-light">SAKILA <small class="font-weight-light">movies</small></a>
-
-
-		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link btn btn-secondary px-3" href="index">
-					<i class="fa fa-home"></i> Index
-				</a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link btn btn-danger ml-1 px-3" href="index?logout=yes">
-					<i class="fa fa-sign-out"></i> Logout
-				</a>
-			</li>
-
-			<img src="/uploads/<?php echo $_SESSION['profile']?>" class="ml-2 img-fluid profile-pic">
-			<p class="text-light ml-2 my-auto pfl-username"> <?php echo $_SESSION["user"]; ?></p>			
-		</ul>
-		
-	</div>
-</nav>
+<?php 
+	echo $settings->get_navbar();
+?>
 
 <div class="container">
 

@@ -49,8 +49,8 @@
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
 
-				if( ajax.response != 'The film is on the cart'){
-					alert(`Film added correctly to the Cart ${ajax.responseText}`)
+				if(!ajax.response.includes('The film is on the cart')){
+					alert(`Film added correctly to the Cart`)
 				}
 				else {
 					alert(`This film is already in the cart`)
@@ -71,6 +71,9 @@
 		ajax.open('POST','./app/functions.php',true)
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
+				if(ajax.response.includes('the cart is empty')){
+					showEmptyCart()
+				}
 				itemRow.innerHTML = ''
 				refreshTotal()
 			}else if (ajax.status === NOT_FOUND){
@@ -79,6 +82,33 @@
 		})
 		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
 		ajax.send( encodeURI(`deleteItem=${filmId}`) )
+	}
+
+	const showEmptyCart = () => {
+		const cartContainer = doc.querySelector('#cart-container')
+
+		cartContainer.innerHTML = `
+		<div class="card w-50 mx-auto mt-5">
+		<div class="card-header">
+			<h3 class="text-center">The cart is empty!</h3>
+		</div> 
+
+		<div class="card-body">
+			<div class="text-center">
+				<i class="fa fa-shopping-cart fa-5x"></i>
+			</div>
+
+			<div class="text-center font-weight-bold mt-3">
+				<p>Add some movies and come back to rent him!</p>
+			</div>
+		</div>
+
+		<div class="card-footer">
+			<a href="index" class="btn btn-success w-100 font-weight-bold"> 
+				Back to Film Index
+			</a>
+		</div>
+	</div>`
 	}
 	
 	const refreshTotal = () => {
