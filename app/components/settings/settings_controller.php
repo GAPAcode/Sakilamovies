@@ -1,5 +1,5 @@
 <?php 
-require_once 'app/model/settings_model.php';
+require_once __DIR__ . '/settings_model.php';
 
 $thispage = $_SERVER['PHP_SELF'];
 $settings = new Settings();
@@ -32,6 +32,6 @@ if (isset($_POST["save"])) {
 $countries = $settings->get_countries();
 $cities = $settings->get_city();
 
-require_once 'app/view/settings_view.php';
+require_once __DIR__ . '/settings_view.php';
 $settings->close_connection();
  ?>

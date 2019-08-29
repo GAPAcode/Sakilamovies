@@ -1,6 +1,6 @@
 <?php 
 
-require_once 'app/model/cart_model.php';
+require_once __DIR__ . '/cart_model.php';
 $cart = new Cart();
 
 
@@ -19,4 +19,4 @@ if(isset($_SESSION['cart'])){
 }else{
     $cartNotEmpty = false;
 }
-require_once 'app/view/cart_view.php';
+require_once __DIR__ . '/cart_view.php';

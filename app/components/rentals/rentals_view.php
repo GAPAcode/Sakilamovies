@@ -1,4 +1,4 @@
-<?php echo $rentals->get_navbar() ?>
+<?php $rentals->get_navbar() ?>
 
 <div class="container">
     <?php if( count( $rentals->userRentals ) > 0 ): ?>

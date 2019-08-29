@@ -1,6 +1,6 @@
 <?php
 
-require 'model/config.php';
+require 'app/config.php';
 //Conexion a la BBDD
 
     $conexion_db = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME , DB_USER, DB_PASS);
@@ -51,6 +51,7 @@ function addToCart($filmJson){
 
     if(!isOntheCart( $filmObj , $_SESSION['cart'] ) ){
         array_push($_SESSION['cart'], $filmObj );
+        return 'Film added correctly to the Cart';
     }
     else {
         return 'The film is on the cart';

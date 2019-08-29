@@ -1,8 +1,7 @@
 <?php 
-	require_once 'app/model/signup_model.php';
+	require_once __DIR__ . '/signup_model.php';
 	$thispage = $_SERVER['PHP_SELF'];
-	$signup = new signup();
-	session_start();
+	$signup = new Signup();
 
 	if (isset($_POST['send'])) {
 		$new_tmp_file = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
@@ -15,9 +14,9 @@
 			$_POST["su_pass"],
 			$_FILES['su_pic']["name"]);
 		if ($exito == 1) {
-			header("location:index");
+			header("location:/sakila/");
 		}
 	}
 
-	require_once 'app/view/signup_view.php';
+	require_once __DIR__ . '/signup_view.php';
  ?>

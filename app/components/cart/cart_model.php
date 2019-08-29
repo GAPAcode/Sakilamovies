@@ -1,7 +1,7 @@
 <?php
-require_once 'app/model/index_model.php';
+require_once __DIR__ . '/../../libs/component.php';
 
-class Cart extends Index {
+class Cart extends Component {
     public $cartItems = array();
 
     function __construct(){

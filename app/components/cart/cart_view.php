@@ -1,5 +1,5 @@
 <?php 
-    echo $cart->get_navbar();
+    $cart->get_navbar();
 ?>
 
 

@@ -1,6 +1,6 @@
 <!-- Barra de navegacion -->
 <?php 
-	echo $index->get_navbar();
+	$index->get_navbar();
 ?>
 <!-- Barra de navegacion -->
 

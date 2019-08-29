@@ -1,5 +1,5 @@
 <?php
-require_once 'app/model/rentals_model.php';
+require_once  __DIR__ . '/rentals_model.php';
 
 $rentals = new Rentals();
 
@@ -13,4 +13,4 @@ if (isset($return)) {
     }
 }
 
-require_once 'app/view/rentals_view.php';
+require_once __DIR__ . '/rentals_view.php';

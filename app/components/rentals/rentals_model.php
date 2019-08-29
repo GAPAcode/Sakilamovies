@@ -1,6 +1,6 @@
 <?php 
-require_once 'app/model/index_model.php';
-class Rentals extends Index {
+require_once 'app/libs/component.php';
+class Rentals extends Component {
     public $userRentals = array();
 
     function __construct(){

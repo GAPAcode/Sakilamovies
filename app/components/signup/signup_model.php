@@ -1,11 +1,11 @@
 <?php 
 
-require_once 'app/model/obj_connection.php';
+require_once 'app/libs/component.php';
 
 /**
  * 
  */
-class signup extends Conexion
+class Signup extends Component
 {
 	
 	function __construct()

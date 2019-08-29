@@ -1,8 +1,5 @@
 <?php 
-	echo $film->get_navbar(
-		$film->get_session_username(),
-		$film->get_session_profile_pic()
-	);
+	$film->get_navbar();
 ?>
 <div class="container">
 	<div class="rows">

@@ -1,11 +1,11 @@
 <?php 
-require_once 'app/model/obj_connection.php';
-require_once 'app/model/obj_staff.php';
-require_once 'app/model/obj_categoria.php';
+require_once 'app/libs/component.php';
+require_once 'app/libs/obj_staff.php';
+require_once 'app/libs/obj_categoria.php';
 /**
  * 
  */
-class Management extends Conexion
+class Management extends Component
 {
 	public $session_staff;
 

@@ -1,3 +1,5 @@
+<?php $signup->get_navbar() ?>
+
 <div class="container mt-5">
 	<div class="card w-50 mx-auto">
 		<div class="card-header bg-dark">

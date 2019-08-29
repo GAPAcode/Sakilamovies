@@ -1,7 +1,7 @@
 <?php 
-require_once 'app/model/index_model.php';
+require_once __DIR__ . '/index_model.php';
 	$thispage = str_replace('.php','',$_SERVER['PHP_SELF']);
-	$index = new index();
+	$index = new Index();
 
 	$index->set_pag_actual(1);
 	$index->set_pag_size(12);
@@ -54,5 +54,5 @@ require_once 'app/model/index_model.php';
 	$film_list = $index->get_film_list();
 
 	$categorias = $index->get_categorias();
-require_once 'app/view/index_view.php';
+require_once __DIR__ . '/index_view.php';
  ?>

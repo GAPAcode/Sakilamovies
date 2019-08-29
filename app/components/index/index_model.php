@@ -3,11 +3,11 @@
 	/**
 	 * 
 	 */
-	require_once 'app/model/obj_connection.php';
-	require_once 'app/model/obj_film_list.php';
-	require_once 'app/model/obj_categoria.php';
+	require_once 'app/libs/component.php';
+	require_once 'app/libs/obj_film_list.php';
+	require_once 'app/libs/obj_categoria.php';
 	
-	class index extends Conexion
+	class Index extends Component
 	{
 		private $film_list = array();
 		private $categorias = array();
@@ -17,109 +17,12 @@
 		private $pag_size;
 		private $cat_actual;
 		private $busqueda_actual;
-		private $session_username;
-		private $session_profile_pic;
-		protected $user_id;
 
 
 		function __construct(){
 			parent::__construct();
-			session_start();
-			if ( isset($_SESSION['user']) && isset( $_SESSION['profile'] ) ) {
-				$this->session_username = $_SESSION['user'];
-				$this->session_profile_pic = $_SESSION['profile'];
-				$this->user_id = $this->getUserId();
-			}
 		}
-		private function getUserId(){
-			$query = 'SELECT customer_id FROM customer WHERE username = :username';
-
-			$resultado = $this->conexion_db->prepare($query);
-			$resultado->execute(array(':username' => $this->session_username));
-			
-			$id = $resultado->fetch(PDO::FETCH_ASSOC);
-
-			return $id['customer_id'];
-		}
-
-		public function get_navbar(string $username = null,string $prof_pic = null){
-			if (isset($this->session_username) && $username == null) {
-				$username = $this->session_username;
-				$prof_pic = $this->session_profile_pic;
-			}
-
-			$content = '
-			<nav class="navbar navbar-expand-lg bg-dark">
-			<div class="container">
-				<!-- brand logo -->
-				<a href="/sakila/index" class="navbar-brand text-light">
-					SAKILA <small class="font-weight-light">movies</small>
-				</a>
 		
-				<!-- navbar principal -->
-				<ul class="navbar-nav">';
-			if ($username != null) {
-				//vista si hay usuario en sesión
-				$content = $content . '
-					<li class="nav-item">
-						<a class="nav-link text-light text-center bg-info border border-secondary rounded-circle film-cart" href="/sakila/rentals" title="Your Film Rentals">
-							<i class="fa fa-film"></i>
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link text-light bg-success border border-secondary rounded-circle mx-1 film-cart" href="/sakila/cart" title="Film Cart">
-							<i class="fa fa-shopping-cart"></i>
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link btn btn-secondary px-3" href="/sakila/index">
-							<i class="fa fa-home"></i> Index
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link btn btn-danger ml-1 px-3" href="/sakila/index?logout=yes">
-							<i class="fa fa-sign-out"></i> Logout
-						</a>
-					</li>
-
-					<li class="nav-item my-auto">
-						<a class="nav-link ml-2 btn btn-light my-auto pt-1 pb-0 px-1" href="settings">
-							<i class="fa fa-gear settings-icon"></i>
-						</a>
-					</li>'
-					.' 
-					<img src="/uploads/'. $prof_pic .'" class="ml-2 img-fluid profile-pic">
-					<p class="text-light ml-2 my-auto pfl-username"> 
-						'. $username .
-					'</p>';
-			} else {
-				$content = $content . '
-				<li class="nav-item">
-					<a class="nav-link btn btn-secondary px-3" href="/sakila/index">
-						<i class="fa fa-home"></i> Index
-					</a>
-				</li>
-				<li class="nav-item">
-					<button type="button" class="nav-link text-light btn btn-primary ml-1 px-3" data-toggle="modal" data-target="#login">
-						<i class="fa fa-user"></i> Login
-					</button>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-light btn btn-success ml-1 px-3" href="signup">
-						<i class="fa fa-sign-in"></i> Sign up
-					</a>
-				</li>';
-			}
-			$content = $content . '
-					</ul>
-				</div>
-			</nav>';
-
-			return $content;
-		}
 
 		public function login(string $username,string $password){
 			$user = htmlentities(addslashes($username));
@@ -156,8 +59,13 @@
 			$pag_init = ($this->pag_actual - 1)*$this->pag_size;
 
 			if (isset($this->busqueda_actual)) {
-				$query = "SELECT FID FROM film_list WHERE title LIKE '%". $this->busqueda_actual . "%'";
-				$query2 = "SELECT * FROM film_list WHERE title LIKE '%" . $this->busqueda_actual . "%' ORDER BY FID LIMIT $pag_init,$this->pag_size";
+				$query = 
+				"SELECT FID FROM film_list 
+				WHERE title LIKE '%". $this->busqueda_actual . "%'";
+				$query2 = 
+				"SELECT * FROM film_list 
+				WHERE title LIKE '%" . $this->busqueda_actual . "%' 
+				ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}		
 			else if(isset($this->cat_actual)) {
 				$query = "SELECT FID FROM film_list WHERE category = '$this->cat_actual'";
@@ -322,13 +230,5 @@
 
 		public function set_busqueda_actual($busqueda){
 		 	$this->busqueda_actual = htmlentities(addslashes($busqueda));
-		}
-
-		public function get_session_profile_pic(){
-			return $this->session_profile_pic;
-		}
-
-		public function get_session_username(){
-			return $this->session_username;
 		}
 	}

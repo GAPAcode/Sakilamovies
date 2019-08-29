@@ -1,10 +1,10 @@
 <?php 
-require_once 'app/model/index_model.php';
+require_once 'app/libs/component.php';
 
 /**
  * 
  */
-class Settings extends Index
+class Settings extends Component
 {
 	function __construct()
 	{

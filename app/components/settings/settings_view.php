@@ -1,5 +1,5 @@
 <?php 
-	echo $settings->get_navbar();
+	$settings->get_navbar();
 ?>
 
 <div class="container">

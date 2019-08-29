@@ -53,11 +53,14 @@
 		ajax.addEventListener('load', () => {
 			if(ajax.status >= OK && ajax.status < 400){
 
-				if(!ajax.response.includes('The film is on the cart')){
+				if(ajax.response.includes('Film added correctly to the Cart')){
 					alert(`Film added correctly to the Cart`)
 				}
-				else {
+				else if (ajax.response.includes('The film is on the cart')){
 					alert(`This film is already in the cart`)
+				}
+				else{
+					alert(`Error, cannot add the film ${ajax.responseText}`)
 				}
 
 			}else if (ajax.status === NOT_FOUND){
@@ -187,8 +190,7 @@
 		const addFilmBtn = doc.querySelector('#rent-btn'),
 		title = doc.querySelector('#film-title'),
 		price = doc.querySelector('#film-price')
-		
-		addFilmBtn.addEventListener('click', (e) => addToCart(e.target.value,
+		addFilmBtn.addEventListener('click', (e) => addToCart(addFilmBtn.value,
 															title.textContent,
 															price.textContent ))
 	}
