@@ -86,3 +86,20 @@
 	background-color: #ff5f5f;
 	text-decoration: none;
 }
+
+footer{
+	position: relative;
+	bottom: 0;
+}
+.footer-fixed{
+	position: fixed;
+	bottom: 0;
+}
+
+footer .social-media {
+	list-style: none;
+}
+
+footer .social-media i{
+	width: 16px;
+}

@@ -48,6 +48,6 @@
 	</div>
 </div>
 
-<footer class="container-fluid mt-5 py-4 text-center text-light bg-info">
-        Lorem ipsum dolor, sit amet consectetur
-</footer>
+<?php 
+	$signup->getFooter();
+?>

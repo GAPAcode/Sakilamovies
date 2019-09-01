@@ -18,7 +18,7 @@ require_once __DIR__ . '/index_model.php';
 			}
 			$_SESSION["user"] = $index->get_session_username();
 			$_SESSION["profile"] = $index->get_session_profile_pic();
-			header("location:index");
+			header("location:/sakila");
 		}
 	}
 	

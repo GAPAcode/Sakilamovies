@@ -19,11 +19,11 @@
 			alert('Your search is empty')
 		}else{
 			showRedirect();
-			searchRedirect(obj.value);
+			searchFilm(obj.value);
 		}
 	}
 	
-	const searchRedirect = (search) => {
+	const searchFilm = (search) => {
 		doc.location.href = `http://localhost/sakila/search/${search}`
 	}
 	
@@ -133,13 +133,17 @@
 
 	//general
 	doc.addEventListener('DOMContentLoaded',() => {
-		const navbarbtns = doc.querySelectorAll('.nav-item, .nav-item, .dropdown-item, .page-item, .film-btn')
+		const body = doc.querySelector('body'),
+		footer = doc.querySelector('footer'),
+		navbarbtns = doc.querySelectorAll('.nav-item, .nav-item, .dropdown-item, .page-item, .film-btn')
 		
 		navbarbtns.forEach((btn) => {
 			if(!btn.querySelector('[data-toggle] ')){			
 				btn.addEventListener( 'click' , () => showRedirect() )
 			}
 		})
+		if(body.offsetHeight < 700)
+		footer.classList += ' footer-fixed'
 
 	})
 	

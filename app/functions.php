@@ -1,6 +1,6 @@
 <?php
 
-require 'app/config.php';
+require __DIR__ . '/config.php';
 //Conexion a la BBDD
 
     $conexion_db = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME , DB_USER, DB_PASS);
@@ -23,11 +23,11 @@ function getSelectCity($conexion, $c_id, $user_city)
     <label for="select_city">City</label>
     <select name="st_city" id="select_city" class="form-control">';
     foreach ($cities as $city) {
-        $content = $content . '<option value="'. $city->city_id . '"' . ($city->city_id == intval($user_city)? 'selected' :'') . '> 
+        $content .= '<option value="'. $city->city_id . '"' . ($city->city_id == intval($user_city)? 'selected' :'') . '> 
         '. $city->city .'
         </option>';
     }
-    $content = $content . '</select>';
+    $content .= '</select>';
 
     return $content;
 }
@@ -68,7 +68,7 @@ function deleteCartItem( $filmId ){
             }   
         );
     
-    return isCartEmpty()?'the cart is empty':'';
+    return isCartEmpty()? 'the cart is empty' : '';
     
 }
 

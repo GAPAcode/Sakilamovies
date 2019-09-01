@@ -2,7 +2,7 @@
 
 <div class="container">
     <?php if( count( $rentals->userRentals ) > 0 ): ?>
-    <div class="card w-75 mx-auto">
+    <div class="card w-75 mx-auto mt-5">
         <div class="card-header">
             <h3>Your rentals</h3>
             <?php if(isset($_POST['msg']))
@@ -61,3 +61,7 @@
             </div>
     <?php endif ?>
 </div>
+
+<?php 
+    $rentals->getFooter();
+?>

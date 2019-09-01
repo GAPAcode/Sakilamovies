@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<div class="card w-75 mx-auto">
+	<div class="card w-75 mx-auto mt-3">
 		
 		<div class="card-header">
 			<h1><i class="fa fa-gear mr-1"></i>Settings</h1>	
@@ -72,13 +72,14 @@
 
 				<div class="form-group w-50 mx-auto">
 					
-					<input class="btn btn-success w-100" type="submit" name="save" value="Save Changes">
+					<input class="btn btn-success w-100 mt-3" type="submit" name="save" value="Save Changes">
 				</div>
 			</form>
 		</div>
-
-		<div class="card-footer">
-			
-		</div>
 	</div>
+
 </div>
+
+<?php 
+	$settings->getFooter();
+?>

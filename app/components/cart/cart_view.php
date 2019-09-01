@@ -2,8 +2,6 @@
     $cart->get_navbar();
 ?>
 
-
-    
 <div class="container" id="cart-container">
     <?php if( $cartNotEmpty ): ?>
         <div class="card w-75 mx-auto mt-2">
@@ -63,7 +61,7 @@
 
     <?php else: ?>
 
-            <div class="card w-50 mx-auto mt-5">
+            <div class="card w-50 mx-auto my-5">
                 <div class="card-header">
                     <h3 class="text-center">The cart is empty!</h3>
                 </div> 
@@ -87,3 +85,7 @@
         
     <?php endif; ?>
 </div>
+
+<?php 
+    $cart->getFooter();
+?>

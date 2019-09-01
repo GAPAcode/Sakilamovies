@@ -42,6 +42,10 @@ abstract class Component {
         include_once 'app/templates/navbar.php';
     }
 
+    public function getFooter(){
+        include_once 'app/templates/footer.php';
+    }
+
     public function get_session_profile_pic(){
         return $this->session_profile_pic;
     }
