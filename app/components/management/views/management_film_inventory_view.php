@@ -1,7 +1,7 @@
 <div>
 	<ul class="nav bg-info p-1">
 		<li class="nav-item">
-			<a class="nav-link btn btn-secondary" href="<?php echo $thispage ?>?view=film_inventory">Back to full view</a>
+			<a class="nav-link btn btn-secondary" href="/sakila/management/film_inventory">Back to full view</a>
 		</li>
 
 		<?php if (isset($err)): ?>
@@ -18,8 +18,8 @@
 			</button>
 		</li>
 		
-		<li class="nav-item">
-			<form class="form-inline" action="<?php echo $thispage . '?view=film_inventory' ?>" method="post">
+		<li>
+			<form class="form-inline h-100" action="/sakila/management/film_inventory" method="post">
 				<input id="s_search" class="form-control mr-1" type="text" name="s_stock" placeholder="Search Film in Stock">
 				<input type="submit" class="btn btn-warning" value="Search">
 			</form>
@@ -83,7 +83,7 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form action="<?php $thispage ?>" method="post" >
+				<form action="/sakila/management/film_inventory" method="post" >
 					<div class="form-group">
 						<label for="f_stores"><i class="fa fa-store"></i>Select Store</label>
 						<select class="form-control" id="f_stores" name="ai_store">

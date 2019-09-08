@@ -5,7 +5,7 @@
 		<h2>Film Management - New film</h2>
 	</div>
     <div class="card-body">
-    	<form action="<?php echo $thispage ?>" method="POST">
+    	<form action="/sakila/management/new_film" method="POST">
     		<div class="row">
     			<div class="col-lg-8">
     				

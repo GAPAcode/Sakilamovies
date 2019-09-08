@@ -1,8 +1,5 @@
 ;
 ((c , doc , ajax) => {
-	const OK = 200,
-	NOT_FOUND = 404
-
 	const showRedirect = () => {
 		const icon = doc.querySelector('#redirect')
 		icon.style = 'display:block;'
@@ -13,6 +10,11 @@
 		showRedirect()
 	}
 
+	
+	const searchFilm = (search) => {
+		doc.location.href = `http://localhost/sakila/search/${search}`
+	}
+	
 	const checkEmptyAndSearch = (e,obj) => {
 		e.preventDefault()
 		if(obj.value === '' || obj.value === null){
@@ -22,24 +24,30 @@
 			searchFilm(obj.value);
 		}
 	}
-	
-	const searchFilm = (search) => {
-		doc.location.href = `http://localhost/sakila/search/${search}`
+
+	const refreshTotal = () => {
+		const totalAmount = doc.querySelector('#cart-total')
+		const itemPrices =  doc.querySelectorAll('.item-price')
+
+		let total = 0;
+
+		itemPrices.forEach(item => {
+			total += parseFloat(item.textContent)
+		})
+
+		totalAmount.textContent = `$${total}`
 	}
 	
 	const getCity = (e,city,inputCity) => {
-		if(e.target.name == "st_country"){
-			ajax.open('POST','./app/functions.php',true)
-			ajax.addEventListener('readystatechange', () => {
-				if(ajax.status >= OK && ajax.status < 400){
-					city.innerHTML = ajax.response
-				}else if (ajax.status === NOT_FOUND){
-					city.innerHTML = `Error ${ajax.status}, ${ajax.statusText}`
-				}
-			})
-			ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
-			ajax.send( encodeURI(`country=${e.target.value}&city=${inputCity.value}`) )
-		}
+
+		fetch(`/sakila/app/functions/?country=${e.target.value}&city=${inputCity.value}`)
+		.then(response => response.text())
+		.then(text => {
+			if(e.target.name === 'st_country')
+				city.innerHTML = text
+		})
+		.catch( err => c(`Error: ${err.message}`) )
+
 	}
 
 	const addToCart = (filmId,title,price) => {
@@ -49,46 +57,28 @@
 			'price' : price
 		}
 
-		ajax.open('POST','/sakila/app/functions/',true)
-		ajax.addEventListener('load', () => {
-			if(ajax.status >= OK && ajax.status < 400){
-
-				if(ajax.response.includes('Film added correctly to the Cart')){
-					alert(`Film added correctly to the Cart`)
-				}
-				else if (ajax.response.includes('The film is on the cart')){
-					alert(`This film is already in the cart`)
-				}
-				else{
-					alert(`Error, cannot add the film ${ajax.responseText}`)
-				}
-
-			}else if (ajax.status === NOT_FOUND){
-				alert(`Error ${ajax.status}, ${ajax.statusText}`)
-			}
-		})
-		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
-		ajax.send( encodeURI(`filmjson=${JSON.stringify(film)}`) )
+		fetch(`/sakila/app/functions/?addToCart=${JSON.stringify(film)}`)
+		.then(response => response.text())
+		.then(text => alert(text))
+		.catch(err => c(`Error: ${err.message}`))
 		
 	}
 
 	const deleteCartItem = (filmId) => {
 		const itemRow = doc.querySelector(`#item-${parseInt(filmId)}`)
-		
-		ajax.open('POST','./app/functions.php',true)
-		ajax.addEventListener('load', () => {
-			if(ajax.status >= OK && ajax.status < 400){
-				if(ajax.response.includes('the cart is empty')){
-					showEmptyCart()
-				}
-				itemRow.innerHTML = ''
+
+		fetch(`/sakila/app/functions/?deleteItem=${filmId}`)
+		.then(response => response.text())
+		.then(text => {
+			if (text.includes('the cart is empty')) {
+				showEmptyCart()
+			}else{
+				itemRow.remove()
 				refreshTotal()
-			}else if (ajax.status === NOT_FOUND){
-				alert(`Error ${ajax.status}, ${ajax.statusText}`)
 			}
 		})
-		ajax.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
-		ajax.send( encodeURI(`deleteItem=${filmId}`) )
+		.catch(err => c(`Error: ${err.message}`))
+
 	}
 
 	const showEmptyCart = () => {
@@ -117,19 +107,95 @@
 		</div>
 	</div>`
 	}
-	
-	const refreshTotal = () => {
-		const totalAmount = doc.querySelector('#cart-total')
-		const itemPrices =  doc.querySelectorAll('.item-price')
 
-		let total = 0;
+	const renderSalesByCategoryChart = (data) => {
+		const salesByCategory = doc.getElementById('salesByCategory')
 
-		itemPrices.forEach(item => {
-			total += parseFloat(item.textContent)
+		let chart = new Chart(salesByCategory, {
+			type: 'bar',
+			data: {
+				labels: data.labels,
+				datasets: [{
+					label: 'Total Sales',
+					data: data.sales,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)',
+						'rgba(255, 159, 64, 0.6)',
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)',
+						'rgba(255, 159, 64, 0.6)',
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)',
+						'rgba(255, 159, 64, 0.6)',
+					],
+					borderWidth: "2"
+				}],
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
 		})
-
-		totalAmount.textContent = `$${total}`
+	
 	}
+
+	function requestSalesByCategory (){
+		fetch('/sakila/app/functions/?salesByCategory=get')
+		.then(response => response.json())
+		.then(json => renderSalesByCategoryChart(json))
+		.catch(err => c(err.message))
+	}
+
+	const renderSalesByDateChart = (data) => {
+		const salesByCategory = doc.getElementById('dailySalesChart')
+
+		let chart = new Chart(salesByCategory, {
+			type: 'line',
+			data: {
+				labels: data.labels,
+				datasets: [{
+					label: 'Sales by Date',
+					data: data.sales,
+					filled:true,
+					backgroundColor: 'rgba(23, 162, 184,0.6)'
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		})
+	}
+
+	function requestSalesByDate (){
+		fetch('/sakila/app/functions/?salesByDate=get')
+		.then(response => response.json())
+		.then(json => renderSalesByDateChart(json))
+		.catch(err => c(err.message))
+
+	}
+
+
 
 	//general
 	doc.addEventListener('DOMContentLoaded',() => {
@@ -138,9 +204,8 @@
 		navbarbtns = doc.querySelectorAll('.nav-item, .nav-item, .dropdown-item, .page-item, .film-btn')
 		
 		navbarbtns.forEach((btn) => {
-			if(!btn.querySelector('[data-toggle] ')){			
+			if(!btn.querySelector('[data-toggle] '))			
 				btn.addEventListener( 'click' , () => showRedirect() )
-			}
 		})
 		if(body.offsetHeight < 700)
 		footer.classList += ' footer-fixed'
@@ -148,7 +213,9 @@
 	})
 	
 	// Indice
-	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index') {
+	if (doc.location.pathname == '/sakila/' || doc.location.pathname == '/sakila/index' || 
+		doc.location.pathname.includes('/search')) {
+			
 		const loginModal = doc.querySelector('#login'),
 		search = doc.querySelector('#film_search'),
 		searchInput = doc.querySelector('#s_input'),
@@ -206,6 +273,12 @@
 		deleteCartItemBtns.forEach((btn) => {
 			btn.addEventListener('click', (e) => deleteCartItem(e.target.dataset.item))
 		})
+	}
+
+	//management
+	if(doc.location.pathname == '/sakila/management'){
+		requestSalesByCategory()
+		requestSalesByDate()
 	}
 
 })(console.log, document, new XMLHttpRequest)

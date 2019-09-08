@@ -1,12 +1,13 @@
 <?php
 
 require __DIR__ . '/config.php';
+require __DIR__ . '/libs/obj_connection.php';
+
 //Conexion a la BBDD
 
-    $conexion_db = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME , DB_USER, DB_PASS);
+    $conexionObj = new Conexion();
 
-    $conexion_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conexion_db->exec("SET CHARACTER SET ". DB_CHARSET);
+    $conexion_db = $conexionObj->getDatabaseConnection();
 
 //Funciones
 function getSelectCity($conexion, $c_id, $user_city)
@@ -78,19 +79,80 @@ function isCartEmpty(){
     }
 }
 
+function getSalesByCategory($conexion_db)
+{
+    $salesArrayA = array();  
+    $salesArrayA['labels'] = array();
+    $salesArrayA['sales'] = array();
+
+    $query = "SELECT * FROM sales_by_film_category;";
+    $resultado = $conexion_db->prepare($query);
+    $resultado->execute();
+
+    while( $sales = $resultado->fetch(PDO::FETCH_ASSOC)){
+        array_push( $salesArrayA['labels'] , $sales['category']);
+        array_push( $salesArrayA['sales'] , $sales['total_sales']);
+    }
+    return $salesArrayA;
+    $resultado->closeCursor();
+
+}
+
+function getJsonSalesBycategory($conexion_db){
+    $salesArrayA = getSalesByCategory($conexion_db);
+
+    $jsonA = json_encode($salesArrayA);
+
+    return $jsonA;
+};
+
+function getDailySales($conexion_db)
+{
+    $salesArrayB = array();  
+    $salesArrayB['labels'] = array();
+    $salesArrayB['sales'] = array();
+
+    $query = "SELECT * FROM `sales_by_date` WHERE date_sales > '2005-08-01' ORDER BY `date_sales`";
+    $resultado = $conexion_db->prepare($query);
+    $resultado->execute();
+
+    while( $sales = $resultado->fetch(PDO::FETCH_ASSOC)){
+        array_push( $salesArrayB['labels'] , $sales['date_sales']);
+        array_push( $salesArrayB['sales'] , $sales['sales']);
+    }
+    return array_reverse($salesArrayB);
+    $resultado->closeCursor();
+
+}
+
+function getJsonDailySales($conexion_db){
+    $salesArrayB = getDailySales($conexion_db);
+
+    $jsonB = json_encode($salesArrayB);
+
+    return $jsonB;
+};
+
 //Disparadores
 
 //Obtener ciudades segun pais
-if(isset($_POST["country"]) && isset($_POST["city"])){
-    echo getSelectCity($conexion_db,$_POST["country"],$_POST["city"]);
+if(isset($_GET["country"]) && isset($_GET["city"])){
+    echo getSelectCity($conexion_db,$_GET["country"],$_GET["city"]);
 }
 
 //Añadir al carrito
-if(isset($_POST['filmjson'])){
-    echo addToCart($_POST['filmjson']);
+if(isset($_GET['addToCart'])){
+    echo addToCart($_GET['addToCart']);
 }
 
-if (isset($_POST['deleteItem'])) {
-    echo deleteCartItem($_POST['deleteItem']);
+if (isset($_GET['deleteItem'])) {
+    echo deleteCartItem($_GET['deleteItem']);
 }
 
+if (isset($_GET['salesByCategory'])) {
+    echo getJsonSalesBycategory($conexion_db);
+}
+
+if (isset($_GET['salesByDate'])) {
+    echo getJsonDailySales($conexion_db);
+}

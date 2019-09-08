@@ -1,5 +1,6 @@
 <?php 
-	$film->get_navbar();
+	$this->get_header();
+	$this->get_navbar();
 ?>
 <div class="container">
 	<div class="rows">
@@ -7,23 +8,23 @@
 		<div class="col-lg-9">
 			<div class="card mt-5">
 				<div class="card-header bg-light">
-					<h3 id="film-title"><?php echo $film->film_details->get_titulo() ?></h3>
-					<strong>Category: </strong> <span class="badge badge-warning"><?php echo $film->film_details->get_categoria() ?></span>
+					<h3 id="film-title"><?php echo $this->film_details->title ?></h3>
+					<strong>Category: </strong> <span class="badge badge-warning"><?php echo $this->film_details->category ?></span>
 				</div>
 				<div class="card-body bg-light">
 					<div class="jumbotron">
 						<h4>Description: </h4>
-						<p><?php echo $film->film_details->get_descripcion() ?></p>
+						<p><?php echo $this->film_details->description ?></p>
 
 						<h4>Actors: </h4>
-						<p><?php echo $film->film_details->get_actores() ?></p>
+						<p><?php echo $this->film_details->actors ?></p>
 
 						<div>
 							<div class="bg-secondary p-1 rounded text-light" style="display: inline-block;">
-								<strong>Length: <?php echo $film->film_details->get_duracion() ?>min</strong>
+								<strong>Length: <?php echo $this->film_details->length ?>min</strong>
 							</div>
 							<div class="bg-warning p-1 rounded" style="display: inline-block;">
-								<strong>Rating: <?php echo $film->film_details->get_clasificacion() ?></strong> 
+								<strong>Rating: <?php echo $this->film_details->rating ?></strong> 
 							</div>
 						</div>
 
@@ -31,7 +32,7 @@
 					<div class="bg-info p-3 w-25 rounded">
 						<h5 class="text-light">Rent price</h5>
 						<div class="bg-dark p-1 w-50 rounded">
-							<span id="film-price" class="font-weight-bold text-light"><?php echo $film->film_details->get_precio() ?></span>
+							<span id="film-price" class="font-weight-bold text-light"><?php echo $this->film_details->price ?></span>
 						</div>
 					</div>
 				</div>
@@ -39,8 +40,8 @@
 				<?php if(isset($_SESSION["user"])): ?>
 
 				<div class="card-footer bg-dark">
-					<button id="rent-btn" class="btn btn-success w-100" value="<?php echo $film->film_details->get_id() ?>">
-						Rent this film for <span class="badge badge-primary"><?php echo $film->film_details->get_precio() ?>$</span>
+					<button id="rent-btn" class="btn btn-success w-100" value="<?php echo $this->film_details->FID ?>">
+						Rent this film for <span class="badge badge-primary"><?php echo $this->film_details->price ?>$</span>
 					</button>
 				</div>
 
@@ -61,5 +62,5 @@
 </div>
 
 <?php 
-	$film->getFooter();
+	$this->getFooter();
 ?>

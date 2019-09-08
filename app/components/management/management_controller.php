@@ -13,7 +13,7 @@ if (isset($_POST["m_login_send"])) {
 		if (isset($_POST["m_remember"])) {
 			setcookie("c_user_manager",	$management->session_staff->get_username(),time()+50000);
 		}
-		header("location:management");
+		header("location:/sakila/management");
 	}
 }
 
@@ -35,19 +35,19 @@ if (isset($_POST["newfilm"])) {
 		);
 
 	if ($exito > 0) {
-		header("location:management");
+		header("location:/sakila/management");
 	}
 }
 if (isset($_POST["add_inv"])) {
 	$management->add_stock($_POST["ai_store"],$_POST["ai_film"],$_POST["ai_quantity"]);
-	header("location:management?view=film_inventory");
+	header("location:/sakila/management/film_inventory");
 }
 
 if (isset($_SESSION['user_manager'])) {
 	require_once __DIR__ . '/management_view.php';
 }
 else{
-	require_once __DIR__ . '/management_login_view.php';
+	require_once __DIR__ . '/views/management_login_view.php';
 }
 
  ?>

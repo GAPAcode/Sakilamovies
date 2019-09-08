@@ -103,3 +103,15 @@ footer .social-media {
 footer .social-media i{
 	width: 16px;
 }
+
+.graph-bar{
+	display:inline-block;
+	width:5%;
+	padding-bottom: 1rem;
+}
+.graph-bar span{
+	display: block;
+	float: left;
+	width: -webkit-fill-available;
+	transform: rotate(-101grad)
+}

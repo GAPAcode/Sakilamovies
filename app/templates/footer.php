@@ -107,3 +107,11 @@
 	</div>
 </div>
 <!-- Icono de redireccion -->
+
+
+<script type="text/javascript" src="/sakila/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/sakila/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="/sakila/js/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="/sakila/js/util.js"></script>
+</body>
+</html>

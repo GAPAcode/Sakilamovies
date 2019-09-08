@@ -23,10 +23,15 @@
 			parent::__construct();
 		}
 		
+		public function render(){
+			$this->get_film_list();
+			$this->get_categorias();
+			require_once __DIR__ . '/index_view.php';
+		}
 
-		public function login(string $username,string $password){
-			$user = htmlentities(addslashes($username));
-			$pass = htmlentities(addslashes($password));
+		public function login(){
+			$user = htmlentities(addslashes($_POST["l_user"]));
+			$pass = htmlentities(addslashes($_POST["l_pass"]));
 			$cont = 0;
 
 			$query = "SELECT password,profile_pic FROM customer WHERE username = :user";
@@ -36,11 +41,18 @@
 			while ($registro=$resultado->fetch(PDO::FETCH_ASSOC)) {
 				if (password_verify($pass,$registro["password"])) {
 					$cont++;
-					$this->session_username = $username;
-					$this->session_profile_pic = $registro["profile_pic"];
+					$this->session_username = $user;
+					$this->session_profile_pic = ($registro["profile_pic"] != '')?$registro["profile_pic"]:'default.jpg';
+
+					//checking remember me
+					if (isset($_POST["l_remember"])) {
+						setcookie("c_username",$_POST["l_user"],time()+50000);
+					}
+					$_SESSION["user"] = $this->session_username;
+					$_SESSION["profile"] = $this->session_profile_pic;
 				}
 			}
-			
+
 
 			return $cont;
 			$resultado->closeCursor();
@@ -55,24 +67,24 @@
 				header("location:/sakila/index");
 		}
 
-		public function get_film_list(){
+		private function get_film_list(){
 			$pag_init = ($this->pag_actual - 1)*$this->pag_size;
 
 			if (isset($this->busqueda_actual)) {
 				$query = 
 				"SELECT FID FROM film_list 
-				WHERE title LIKE '%". $this->busqueda_actual . "%'";
+				WHERE title LIKE '%". $this->busqueda_actual . "%' AND is_film_in_stock(film_list.FID,1)";
 				$query2 = 
 				"SELECT * FROM film_list 
-				WHERE title LIKE '%" . $this->busqueda_actual . "%' 
+				WHERE title LIKE '%" . $this->busqueda_actual . "%' AND is_film_in_stock(film_list.FID,1) 
 				ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}		
 			else if(isset($this->cat_actual)) {
-				$query = "SELECT FID FROM film_list WHERE category = '$this->cat_actual'";
-				$query2 = "SELECT * FROM film_list WHERE category = '$this->cat_actual' ORDER BY FID LIMIT $pag_init,$this->pag_size";
+				$query = "SELECT FID FROM film_list WHERE category = '$this->cat_actual' AND is_film_in_stock(film_list.FID,1)";
+				$query2 = "SELECT * FROM film_list WHERE category = '$this->cat_actual'AND is_film_in_stock(film_list.FID,1) ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}else{
-				$query = "SELECT FID FROM film_list";
-				$query2 = "SELECT * FROM film_list ORDER BY FID LIMIT $pag_init,$this->pag_size";
+				$query = "SELECT FID FROM film_list WHERE is_film_in_stock(film_list.FID,1) ";
+				$query2 = "SELECT * FROM film_list WHERE is_film_in_stock(film_list.FID,1)  ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}
 
 			$resultado = $this->conexion_db->prepare($query);
@@ -107,7 +119,7 @@
 			$this->conexion_db=null;
 		}
 
-		public function get_categorias(){
+		private function get_categorias(){
 			$query = "SELECT * FROM category;";
 			$resultado = $this->conexion_db->prepare($query);
 			$resultado->execute();
@@ -124,7 +136,7 @@
 			return $this->categorias;
 		}
 
-		public function get_paginacion(){
+		private function get_paginacion(){
 			$thispage = str_replace('.php', '' , $_SERVER['PHP_SELF'] );
 			$pag_min = 1;
 

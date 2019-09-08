@@ -1,6 +1,7 @@
 <!-- Barra de navegacion -->
-<?php 
-	$index->get_navbar();
+<?php
+	$this->get_header();
+	$this->get_navbar();
 ?>
 <!-- Barra de navegacion -->
 
@@ -64,7 +65,7 @@
 	<!-- SubMenu de páginas -->
 
 	<!-- paginacion -->
-	<?php $index->get_paginacion() ?>
+	<?php $this->get_paginacion() ?>
 	<!-- paginacion -->
 	
 
@@ -78,7 +79,7 @@
 						Categories
 					</a>
 					<div id="cat1" class="collapse">
-						<?php foreach ($categorias as $categoria): ?>
+						<?php foreach ($this->categorias as $categoria): ?>
 						<a class="dropdown-item text-light" href="<?php echo '/sakila/category/' . $categoria->get_nombre() ?>">
 							<?php echo $categoria->get_nombre(); ?>
 						</a>
@@ -91,10 +92,10 @@
 
 		<!-- Peliculas -->
 		<div class="col-lg-9">
-			<?php $index->get_results_header(); ?>
+			<?php $this->get_results_header(); ?>
 			<div class="row">
 
-				<?php foreach($film_list as $film):?>
+				<?php foreach($this->film_list as $film):?>
 					<div class="col-lg-4 px-2">
 						<div class="card border-0 my-1">
 							<div class="card-header bg-dark text-light">
@@ -126,10 +127,10 @@
 	</div>
 
 	<!-- paginacion -->
-	<?php $index->get_paginacion() ?>
+	<?php $this->get_paginacion() ?>
 	<!-- paginacion -->
 </div>
 
 <?php 
-	$index->getFooter();
+	$this->getFooter();
 ?>

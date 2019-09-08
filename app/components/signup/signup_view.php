@@ -1,4 +1,7 @@
-<?php $signup->get_navbar() ?>
+<?php 
+$this->get_header();
+$this->get_navbar();
+?>
 
 <div class="container mt-5">
 	<div class="card w-50 mx-auto">
@@ -6,7 +9,7 @@
 			<h3 class="text-light">Sakila Signup</h3>
 		</div>
 		<div class="card-body">
-			<form action="<?php $thispage ?>" method="post" enctype="multipart/form-data">
+			<form action="/sakila/signup" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="su_fname"><i class="fa fa-user"></i> Your first name</label>
 					<input id="su_fname" class="form-control" type="text" name="su_fname">
@@ -49,5 +52,5 @@
 </div>
 
 <?php 
-	$signup->getFooter();
+	$this->getFooter();
 ?>

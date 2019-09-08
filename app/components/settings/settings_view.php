@@ -1,4 +1,5 @@
 <?php 
+	$settings->get_header();
 	$settings->get_navbar();
 ?>
 

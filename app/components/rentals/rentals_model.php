@@ -11,6 +11,10 @@ class Rentals extends Component {
 
         $this->userRentals = $this->getUserRentals();
     }
+
+    public function render () {
+        require_once __DIR__ . '/rentals_view.php';
+    }
     
     public function getUserRentals(){
         $query = 

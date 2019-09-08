@@ -1,3 +1,5 @@
+<?php $management->get_navbar() ?>
+
 <div class="container" id="login_management">
 	<div class="card w-50 mx-auto mt-5">
 		<!-- Card Header -->
@@ -6,7 +8,7 @@
 		</div>
 		<!-- Modal body -->
 		<div class="card-body">
-			<form action="<?php $thispage ?>" method="post" >
+			<form action="/sakila/management" method="post" >
 				<div class="form-group">
 					<label for="l_user"><i class="fa fa-user"></i> Username</label>
 					<input id="l_user" type="text" name="m_user" class="form-control" autocomplete="username">

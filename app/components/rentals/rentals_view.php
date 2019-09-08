@@ -1,18 +1,21 @@
-<?php $rentals->get_navbar() ?>
+<?php 
+$this->get_header();
+$this->get_navbar();
+?>
 
 <div class="container">
-    <?php if( count( $rentals->userRentals ) > 0 ): ?>
+    <?php if( count( $this->userRentals ) > 0 ): ?>
     <div class="card w-75 mx-auto mt-5">
         <div class="card-header">
             <h3>Your rentals</h3>
-            <?php if(isset($_POST['msg']))
-                echo '<strong>'.$_POST['msg'].'</strong>';
-            ?>
+                <?php if(isset($_POST['msg']))
+                    echo '<strong>'.$_POST['msg'].'</strong>';
+                ?>
         </div>
 
         <div class="card-body">
             <div class="row">
-            <?php foreach($rentals->userRentals as $rental):?>
+            <?php foreach($this->userRentals as $rental):?>
                 <div class="col-md-6 py-1">
 
                     <div class="card">
@@ -63,5 +66,5 @@
 </div>
 
 <?php 
-    $rentals->getFooter();
+    $this->getFooter();
 ?>

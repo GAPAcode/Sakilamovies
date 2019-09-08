@@ -11,8 +11,14 @@ class Management extends Component
 
 	function __construct()
 	{
-		parent::__construct();
+		parent::__construct(Component::MANAGEMENT_COMPONENT);
 	}
+	
+	//Overrides parent function
+	public function get_navbar(){
+		include_once 'app/components/management/views/management_navbar.php';
+	}	
+
 	public function login(string $username,string $password){
 		$user = htmlentities(addslashes($username));
 		$pass = htmlentities(addslashes($password));
@@ -56,7 +62,7 @@ class Management extends Component
 		if (isset($_COOKIE[$cookieSessionName])) {
 			setcookie($cookieSessionName,"",time()-1);
 		}
-		header("location:index");
+		header("location:/sakila/management");
 	}
 	public function new_film($name,$description,$release,$language,$rental,$length,$rating,$first_actor,$category)
 	{
@@ -214,7 +220,6 @@ class Management extends Component
 		return $actors;
 		$resultado->closeCursor();
 	}
-
 }
 
 ?>
