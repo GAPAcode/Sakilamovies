@@ -40,9 +40,15 @@
 				<?php if(isset($_SESSION["user"])): ?>
 
 				<div class="card-footer bg-dark">
-					<button id="rent-btn" class="btn btn-success w-100" value="<?php echo $this->film_details->FID ?>">
-						Rent this film for <span class="badge badge-primary"><?php echo $this->film_details->price ?>$</span>
-					</button>
+					<?php if($this->film_details->has_stock > 0): ?>
+						<button id="rent-btn" class="btn btn-success w-100" value="<?php echo $this->film_details->FID ?>">
+							Rent this film for <span class="badge badge-primary"><?php echo $this->film_details->price ?>$</span>
+						</button>
+					<?php else: ?>
+						<button id="rent-btn" class="btn btn-success w-100" disabled>
+							Sorry, this film is not in stock
+						</button>
+					<?php endif ?>
 				</div>
 
 				<?php else: ?>

@@ -91,31 +91,39 @@
 		<!-- sidenav de categorias -->
 
 		<!-- Peliculas -->
-		<div class="col-lg-9">
+		<div id="films_column" class="col-lg-9">
 			<?php $this->get_results_header(); ?>
 			<div class="row">
 
 				<?php foreach($this->film_list as $film):?>
-					<div class="col-lg-4 px-2">
+					<div class="film col-lg-4 px-2">
 						<div class="card border-0 my-1">
 							<div class="card-header bg-dark text-light">
-								<h6><i class="fa fa-film mr-2"></i><?php echo ($film->get_titulo()) ?></h6>
+								<h6><i class="fa fa-film mr-2"></i><?php echo ($film->title) ?></h6>
 							</div>
 							<div class="card-body p-0 bg-dark">
 								<img src="http://localhost/uploads/test250x250.png" class="img-fluid w-100">
 								<div class="container badges">
 									<span class="mx-0 badge badge-primary">
-										<?php echo ($film->get_categoria()) ?>
+										<?php echo ($film->category) ?>
 									</span>
 									<span class="mx-0 badge badge-warning">
-										Length: <?php echo ($film->get_duracion()) ?>min
+										Length: <?php echo ($film->length) ?>min
 									</span>
 								</div>
+								
 							</div>
 							<div class="card-footer p-0 bg-dark rounded-bottom">
-								<a href="/sakila/film/<?php echo($film->get_id()); ?>/" class="film-btn btn btn-primary w-100">
-									<?php echo ($film->get_precio()) ?>$
-								</a>
+								<?php if($film->has_stock > 0): ?>
+								<a href="/sakila/film/<?php echo( $film->FID ); ?>/" class="film-btn btn btn-primary w-100">
+								<?php echo ( $film->price )?>$
+							</a>
+							<?php else: ?>
+									<div class="label-out-stock"> Film out stock </div>
+									<button class="film-btn btn btn-secondary w-100" disabled>
+										Sorry this film is out of Stock	
+									</button>
+								<?php endif ?>
 							</div>
 						</div>
 					</div>

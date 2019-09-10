@@ -1,5 +1,20 @@
 ;
 ((c , doc , ajax) => {
+	const displayErrorModal = () => {
+		const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
+
+		error.style = 'display:block;'
+		error.className = 'modal fade opaque'
+		setTimeout(() => error.className = 'modal fade show', 50)
+		
+		errorBtns.forEach( btn => {
+			btn.addEventListener('click',() => {
+				error.className = 'modal fade hide'
+				setTimeout(() => error.style = 'display:none', 150)
+			})
+		})
+	}
+
 	const showRedirect = () => {
 		const icon = doc.querySelector('#redirect')
 		icon.style = 'display:block;'
@@ -10,7 +25,6 @@
 		showRedirect()
 	}
 
-	
 	const searchFilm = (search) => {
 		doc.location.href = `http://localhost/sakila/search/${search}`
 	}
@@ -219,22 +233,12 @@
 		const loginModal = doc.querySelector('#login'),
 		search = doc.querySelector('#film_search'),
 		searchInput = doc.querySelector('#s_input'),
-		error = doc.querySelector('#error')
+		error = doc.querySelector('#error'),
+		filmsColumn = doc.querySelector('#films_column')
 		
 
 		if(error){
-			const errorBtns = error.querySelectorAll('[data-dismiss="modal"]')
-
-			error.style = 'display:block;'
-			error.className = 'modal fade opaque'
-			setTimeout(() => error.className = 'modal fade show', 50)
-			
-			errorBtns.forEach( btn => {
-				btn.addEventListener('click',() => {
-					error.className = 'modal fade hide'
-					setTimeout(() => error.style = 'display:none', 150)
-				})
-			})
+			displayErrorModal()
 		}
 		
 		search.addEventListener( 'submit', (e) => {
@@ -242,8 +246,6 @@
 		})
 		
 		loginModal.addEventListener( 'submit', () => fadeOutAtLogin(loginModal) )
-	
-	
 	
 	}
 	

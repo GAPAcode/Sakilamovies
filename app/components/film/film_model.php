@@ -18,7 +18,9 @@ class Film extends Component
 	private function getFilmDetails ($film_id) {
 		htmlentities(addslashes($film_id));
 	
-		$query = "SELECT * FROM film_list where FID = :film_id";
+		$query = 
+		"SELECT *,is_film_in_stock(FID,1) AS has_stock FROM film_list 
+		 WHERE FID = :film_id";
 	
 		$resultado = $this->conexion_db->prepare($query);
 		$resultado->execute(array(":film_id" => $film_id));

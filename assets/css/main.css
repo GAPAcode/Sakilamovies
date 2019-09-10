@@ -104,14 +104,21 @@ footer .social-media i{
 	width: 16px;
 }
 
-.graph-bar{
-	display:inline-block;
-	width:5%;
+.label-out-stock {
+	transition: 0.5s cubic-bezier(0, 0, 0.21, 1.07);
+	background-color: #dc3545;
+	position: relative;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
+	margin-top: -3.5rem;
+	text-align: center;
+	bottom: -3rem;
+	opacity: 0;
+	color: aliceblue;
+	font-weight: 600;
 }
-.graph-bar span{
-	display: block;
-	float: left;
-	width: -webkit-fill-available;
-	transform: rotate(-101grad)
+
+.film:hover .label-out-stock {
+	opacity: 1;
+	bottom: 8rem;
 }

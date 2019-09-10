@@ -73,18 +73,28 @@
 			if (isset($this->busqueda_actual)) {
 				$query = 
 				"SELECT FID FROM film_list 
-				WHERE title LIKE '%". $this->busqueda_actual . "%' AND is_film_in_stock(film_list.FID,1)";
+				WHERE title LIKE '%". $this->busqueda_actual . "%'";
+				
 				$query2 = 
 				"SELECT * FROM film_list 
-				WHERE title LIKE '%" . $this->busqueda_actual . "%' AND is_film_in_stock(film_list.FID,1) 
+				WHERE title LIKE '%" . $this->busqueda_actual . "%'
 				ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}		
 			else if(isset($this->cat_actual)) {
-				$query = "SELECT FID FROM film_list WHERE category = '$this->cat_actual' AND is_film_in_stock(film_list.FID,1)";
-				$query2 = "SELECT * FROM film_list WHERE category = '$this->cat_actual'AND is_film_in_stock(film_list.FID,1) ORDER BY FID LIMIT $pag_init,$this->pag_size";
+				$query = 
+				"SELECT FID FROM film_list 
+				WHERE category = '$this->cat_actual'";
+				
+				$query2 = 
+				"SELECT * FROM film_list 
+				WHERE category = '$this->cat_actual' ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}else{
-				$query = "SELECT FID FROM film_list WHERE is_film_in_stock(film_list.FID,1) ";
-				$query2 = "SELECT * FROM film_list WHERE is_film_in_stock(film_list.FID,1)  ORDER BY FID LIMIT $pag_init,$this->pag_size";
+				$query = 
+				"SELECT FID FROM film_list";
+
+				$query2 = 
+				"SELECT * FROM film_list 
+				 ORDER BY FID LIMIT $pag_init,$this->pag_size";
 			}
 
 			$resultado = $this->conexion_db->prepare($query);
@@ -100,17 +110,7 @@
 
 			$i = 0;
 			while ($pelicula = $resultado->fetch(PDO::FETCH_OBJ)) {
-				$obj = new pelicula_simple();
-				$obj->set_id($pelicula->FID);
-				$obj->set_titulo($pelicula->title);
-				$obj->set_descripcion($pelicula->description);
-				$obj->set_categoria($pelicula->category);
-				$obj->set_precio($pelicula->price);
-				$obj->set_duracion($pelicula->length);
-				$obj->set_clasificacion($pelicula->rating);
-				$obj->set_actores($pelicula->actors);
-
-				$this->film_list[$i] = $obj;
+				$this->film_list[$i] = $pelicula;
 				$i++;
 			}
 			return $this->film_list;
