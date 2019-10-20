@@ -1,4 +1,6 @@
-<?php $management->get_navbar() ?>
+<?php 
+$management->get_header();
+$management->get_navbar(); ?>
 
 <div class="container" id="login_management">
 	<div class="card w-50 mx-auto mt-5">

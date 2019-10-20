@@ -1,3 +1,4 @@
+<?php include_once __DIR__ . '/templates/header.php' ?>
 <div class="container">
     <div class="w-50 mt-5 mx-auto card">
         <div class="card-header">

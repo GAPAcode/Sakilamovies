@@ -19,7 +19,6 @@ class Cart extends Component {
             header('location:/sakila/cart');
         
         $inventoryIds = $this->getFilmInventoriesIDs();
-        echo(var_dump($inventoryIds));
         $this->addRentalsAndPayments($inventoryIds);
 
         $_SESSION['cart'] = null;

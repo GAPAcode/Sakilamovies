@@ -43,7 +43,7 @@ if (isset($_POST["add_inv"])) {
 	header("location:/sakila/management/film_inventory");
 }
 
-if (isset($_SESSION['user_manager'])) {
+if ($management->isManagerOnSession()) {
 	require_once __DIR__ . '/management_view.php';
 }
 else{
